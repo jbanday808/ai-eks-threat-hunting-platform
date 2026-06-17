@@ -4,11 +4,62 @@
 
 The AI-Powered EKS Threat Hunting & Incident Response Platform is a cloud security project that monitors Kubernetes workloads running on Amazon EKS. It combines infrastructure automation, runtime threat detection, alert visibility, secure access, and future AI-powered triage.
 
-Simple Explanation:
+![AI-Powered EKS Threat Hunting & Incident Response Platform Architecture](../img/ai-eks-threat-hunting-platform-diagram.png)
 
-Think of this platform as a security monitoring system for cloud applications.
+*Figure 1. End-to-end architecture showing Terraform, AWS, Amazon EKS, Falco runtime security, Falcosidekick, Cloudflare DNS, AI-powered alert triage, automated incident reporting, and future CI/CD integration.*
+
+### Architecture Overview
+
+This diagram shows how the platform securely deploys cloud infrastructure, monitors Kubernetes workloads, detects suspicious activity, and supports incident response. Security events flow from the Kubernetes environment into Falco for detection, are presented through Falcosidekick for visibility, and can be processed by the AI triage engine to generate investigation-ready incident reports.
+
+## Detection Workflow
+
+```text
+User Activity
+      ↓
+Amazon EKS Workload
+      ↓
+Falco Runtime Detection
+      ↓
+Falcosidekick Alert Processing
+      ↓
+Dashboard Visibility
+      ↓
+AI Alert Triage
+      ↓
+Incident Report Generation
+      ↓
+Security Investigation
+```
+
+### Simple Explanation
+
+Think of this platform as a modern security monitoring system for cloud applications.
+
+- Amazon EKS hosts the applications.
+- Falco acts like a security camera that watches application activity.
+- Falcosidekick organizes and displays alerts.
+- The AI triage engine helps explain alerts and recommends response actions.
+- Incident reports provide documentation that security teams can use during investigations.
 
 It continuously watches running workloads, detects suspicious behavior, generates alerts, and helps security teams respond faster.
+
+## Major Components
+
+| Component | Purpose | Simple Explanation |
+| --------- | ------- | ------------------ |
+| Terraform | Builds and manages cloud infrastructure using code. | Terraform works like a reusable blueprint for deploying the environment. |
+| Amazon S3 | Stores Terraform remote state. | S3 keeps the infrastructure state file in a central location. |
+| DynamoDB | Provides Terraform state locking. | DynamoDB helps prevent two updates from changing infrastructure at the same time. |
+| Amazon EKS | Runs the managed Kubernetes environment. | EKS hosts the container platform where workloads and security tools run. |
+| Worker Nodes | Provide compute capacity for Kubernetes workloads. | Worker nodes are the machines that run containers. |
+| Falco | Detects suspicious runtime behavior. | Falco watches application activity and creates security alerts. |
+| Falcosidekick | Receives and forwards Falco alerts. | Falcosidekick organizes alerts so they can be reviewed and routed. |
+| AWS Load Balancer | Provides external access to the dashboard. | The load balancer acts as the entry point for secure dashboard access. |
+| Cloudflare | Manages public DNS routing. | Cloudflare connects the friendly domain name to the AWS service. |
+| Route 53 | Supports AWS DNS and certificate validation. | Route 53 helps validate secure access and DNS records. |
+| AI Triage Engine | Analyzes alerts and recommends response actions. | The triage engine turns raw alerts into plain-language findings. |
+| Incident Reports | Document detections and response guidance. | Reports give security teams investigation-ready documentation. |
 
 ## Architecture Components
 
