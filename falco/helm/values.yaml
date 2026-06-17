@@ -1,0 +1,73 @@
+# Falco runtime detection values for EKS.
+# Install with scripts/install-falco.sh so custom rules are loaded from falco/rules/custom-rules.yaml.
+
+controller:
+  kind: daemonset
+
+driver:
+  enabled: true
+  kind: modern_ebpf
+  modernEbpf:
+    leastPrivileged: false
+
+collectors:
+  enabled: true
+  containerEngine:
+    enabled: true
+  kubernetes:
+    enabled: true
+
+falco:
+  priority: debug
+  json_output: true
+  json_include_output_property: true
+  json_include_output_fields_property: true
+  json_include_tags_property: true
+  buffered_outputs: false
+  stdout_output:
+    enabled: true
+  syslog_output:
+    enabled: false
+  http_output:
+    enabled: true
+
+falcosidekick:
+  enabled: true
+  replicaCount: 1
+  config:
+    debug: false
+    customfields: "environment:dev,project:ai-eks-threat-hunting-platform"
+  service:
+    type: ClusterIP
+    port: 2801
+  webui:
+    enabled: true
+    replicaCount: 1
+    existingSecret: "falcosidekick-ui-auth"
+    service:
+      type: ClusterIP
+      port: 2802
+    ingress:
+      enabled: true
+      ingressClassName: "alb"
+      annotations:
+        kubernetes.io/ingress.class: "alb"
+        alb.ingress.kubernetes.io/scheme: "internet-facing"
+        alb.ingress.kubernetes.io/target-type: "ip"
+        alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
+      hosts:
+        - host: falco.caremedix.net
+          paths:
+            - path: /
+              pathType: Prefix
+    redis:
+      enabled: true
+      storageEnabled: false
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 512Mi
+  limits:
+    cpu: 1000m
+    memory: 1024Mi

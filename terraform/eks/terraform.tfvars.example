@@ -1,0 +1,23 @@
+aws_region = "us-east-1"
+
+project_name = "ai-eks-threat-hunting-platform"
+environment  = "dev"
+
+vpc_id = "vpc-0b7f09564a1afc93e"
+
+private_subnet_ids = [
+  "subnet-0004aa53c6d591fce",
+  "subnet-0ef16951aac00ad50"
+]
+
+public_subnet_ids = [
+  "subnet-0dacf6eeb8374b21f",
+  "subnet-01aad51c5b7017fba"
+]
+
+application_security_group_id = "sg-017d7df603788fa47"
+
+node_instance_types = ["t3.medium"]
+node_desired_size   = 2
+node_min_size       = 1
+node_max_size       = 3

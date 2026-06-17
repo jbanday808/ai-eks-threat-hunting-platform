@@ -1,0 +1,30 @@
+{
+  "uuid": "falco-alert-suspicious-exec",
+  "time": "2026-06-17T15:20:05Z",
+  "rule": "AI Suspicious Kubernetes Exec Activity",
+  "priority": "NOTICE",
+  "source": "syscall",
+  "output": "Suspicious Kubernetes exec-like shell activity (user=developer command=bash parent=runc container_name=inventory-api k8s_ns=staging k8s_pod=inventory-api-7b9d6846c4-9xq2p)",
+  "output_fields": {
+    "container.id": "9d83ac527a0f",
+    "container.image.repository": "example/inventory-api",
+    "container.image.tag": "2.1.0",
+    "container.name": "inventory-api",
+    "evt.time": 1781719205000000000,
+    "k8s.ns.name": "staging",
+    "k8s.pod.name": "inventory-api-7b9d6846c4-9xq2p",
+    "proc.aname[2]": "containerd",
+    "proc.cmdline": "bash",
+    "proc.name": "bash",
+    "proc.pname": "runc",
+    "user.name": "developer",
+    "user.uid": 1000
+  },
+  "tags": [
+    "kubernetes",
+    "exec",
+    "shell",
+    "mitre_execution",
+    "T1059"
+  ]
+}

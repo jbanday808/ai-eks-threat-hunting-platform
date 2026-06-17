@@ -1,0 +1,28 @@
+{
+  "uuid": "falco-alert-terminal-shell-t1059",
+  "time": "2026-06-17T15:10:22Z",
+  "rule": "AI Shell Spawned Inside Container",
+  "priority": "WARNING",
+  "source": "syscall",
+  "output": "Shell spawned inside container (user=root command=sh parent=containerd-shim container_name=checkout-api k8s_ns=production k8s_pod=checkout-api-6f7c9d9f9d-2k7mx)",
+  "output_fields": {
+    "container.id": "4f2a7c9d3b1e",
+    "container.image.repository": "example/checkout-api",
+    "container.image.tag": "1.4.2",
+    "container.name": "checkout-api",
+    "evt.time": 1781718622000000000,
+    "k8s.ns.name": "production",
+    "k8s.pod.name": "checkout-api-6f7c9d9f9d-2k7mx",
+    "proc.cmdline": "sh",
+    "proc.name": "sh",
+    "proc.pname": "containerd-shim",
+    "user.name": "root",
+    "user.uid": 0
+  },
+  "tags": [
+    "container",
+    "shell",
+    "mitre_execution",
+    "T1059"
+  ]
+}

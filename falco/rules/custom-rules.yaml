@@ -1,0 +1,64 @@
+- list: ai_shell_binaries
+  items: [sh, bash, dash, ash, zsh, ksh, csh, fish]
+
+- macro: ai_container
+  condition: container.id != host
+
+- macro: ai_shell_spawned
+  condition: spawned_process and proc.name in (ai_shell_binaries)
+
+- rule: AI Shell Spawned Inside Container
+  desc: Detect an interactive or scripted shell spawned inside a container.
+  condition: ai_container and ai_shell_spawned
+  output: >
+    Shell spawned inside container
+    (user=%user.name user_uid=%user.uid command=%proc.cmdline parent=%proc.pname
+    container_id=%container.id container_name=%container.name image=%container.image.repository:%container.image.tag
+    k8s_ns=%k8s.ns.name k8s_pod=%k8s.pod.name)
+  priority: WARNING
+  source: syscall
+  tags: [container, shell, mitre_execution, T1059]
+
+- rule: AI Read Sensitive Shadow File
+  desc: Detect reads of /etc/shadow from inside a container.
+  condition: >
+    ai_container and open_read and
+    (fd.name=/etc/shadow or fd.name startswith /host/etc/shadow)
+  output: >
+    Sensitive shadow file read inside container
+    (user=%user.name user_uid=%user.uid command=%proc.cmdline file=%fd.name
+    container_id=%container.id container_name=%container.name image=%container.image.repository:%container.image.tag
+    k8s_ns=%k8s.ns.name k8s_pod=%k8s.pod.name)
+  priority: CRITICAL
+  source: syscall
+  tags: [container, credential_access, mitre_credential_access, T1003]
+
+- rule: AI Write Under Etc In Container
+  desc: Detect writes under /etc from inside a container.
+  condition: >
+    ai_container and open_write and
+    (fd.name startswith /etc/ or fd.name startswith /host/etc/)
+  output: >
+    File write under /etc inside container
+    (user=%user.name user_uid=%user.uid command=%proc.cmdline file=%fd.name
+    container_id=%container.id container_name=%container.name image=%container.image.repository:%container.image.tag
+    k8s_ns=%k8s.ns.name k8s_pod=%k8s.pod.name)
+  priority: WARNING
+  source: syscall
+  tags: [container, persistence, defense_evasion, mitre_persistence, T1037]
+
+- rule: AI Suspicious Kubernetes Exec Activity
+  desc: Detect shell activity that is commonly created by kubectl exec or similar Kubernetes exec workflows.
+  condition: >
+    ai_container and ai_shell_spawned and
+    (proc.pname in (runc, crun, containerd-shim, containerd-shim-runc-v2) or
+     proc.aname[2] in (runc, crun, containerd-shim, containerd-shim-runc-v2, containerd))
+  output: >
+    Suspicious Kubernetes exec-like shell activity
+    (user=%user.name user_uid=%user.uid command=%proc.cmdline parent=%proc.pname
+    ancestor=%proc.aname[2] container_id=%container.id container_name=%container.name
+    image=%container.image.repository:%container.image.tag
+    k8s_ns=%k8s.ns.name k8s_pod=%k8s.pod.name)
+  priority: NOTICE
+  source: syscall
+  tags: [kubernetes, exec, shell, mitre_execution, T1059]

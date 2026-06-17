@@ -1,0 +1,30 @@
+{
+  "uuid": "falco-alert-write-under-etc-t1037",
+  "time": "2026-06-17T15:14:41Z",
+  "rule": "AI Write Under Etc In Container",
+  "priority": "WARNING",
+  "source": "syscall",
+  "output": "File write under /etc inside container (user=root command=sh -c echo test > /etc/falco-phase3-test file=/etc/falco-phase3-test container_name=checkout-api k8s_ns=production k8s_pod=checkout-api-6f7c9d9f9d-2k7mx)",
+  "output_fields": {
+    "container.id": "4f2a7c9d3b1e",
+    "container.image.repository": "example/checkout-api",
+    "container.image.tag": "1.4.2",
+    "container.name": "checkout-api",
+    "evt.time": 1781718881000000000,
+    "fd.name": "/etc/falco-phase3-test",
+    "k8s.ns.name": "production",
+    "k8s.pod.name": "checkout-api-6f7c9d9f9d-2k7mx",
+    "proc.cmdline": "sh -c echo test > /etc/falco-phase3-test",
+    "proc.name": "sh",
+    "proc.pname": "containerd-shim",
+    "user.name": "root",
+    "user.uid": 0
+  },
+  "tags": [
+    "container",
+    "persistence",
+    "defense_evasion",
+    "mitre_persistence",
+    "T1037"
+  ]
+}
