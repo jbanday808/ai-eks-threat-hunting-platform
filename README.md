@@ -1,53 +1,95 @@
 # AI-Powered EKS Threat Hunting & Incident Response Platform
 
-This project demonstrates a cloud-native threat detection and incident response platform built on Amazon EKS. It combines Terraform-managed AWS infrastructure, Kubernetes runtime monitoring, Falco detections, Falcosidekick alert visibility, Cloudflare DNS, and MITRE ATT&CK mapping.
+## Executive Summary
 
-The goal is to show how modern cloud environments can be monitored for suspicious activity so security teams can improve visibility, validate detections, and respond to runtime threats more effectively.
+This project demonstrates a cloud-native security monitoring platform built on Amazon EKS. It uses Terraform, Kubernetes, Falco, Falcosidekick, Cloudflare, and AI-assisted triage to detect suspicious container activity, map detections to MITRE ATT&CK, and generate incident response reports.
+
+The platform was built to show how security teams can improve Kubernetes visibility, validate runtime detections, and respond faster when suspicious activity appears inside containerized workloads.
 
 ## Project Overview
 
-This platform was built as a hands-on cloud security engineering project focused on Kubernetes runtime threat detection. It shows the full path from infrastructure provisioning to detection validation:
+This project validates the full lifecycle of a cloud security monitoring platform:
 
-- Terraform backend using Amazon S3 and DynamoDB
-- Amazon EKS cluster with managed worker nodes
-- Falco runtime security monitoring
-- Falcosidekick UI exposed through an AWS Load Balancer
-- Cloudflare DNS integration for `falco.caremedix.net`
-- HTTPS access validation
-- Runtime detection testing mapped to MITRE ATT&CK
+- Infrastructure provisioning with Terraform
+- Kubernetes deployment on Amazon EKS
+- Runtime security monitoring with Falco
+- Alert visibility through Falcosidekick
+- DNS and HTTPS access validation
+- Threat detection testing in running workloads
+- MITRE ATT&CK mapping for validated detections
+- AI-powered alert triage
+- Automated Markdown incident reporting
 
-## Architecture
+## Business Value
 
-The architecture uses AWS for infrastructure, EKS for Kubernetes orchestration, Falco for runtime detection, Falcosidekick for alert visibility, and Cloudflare for DNS.
+This platform helps organizations improve Kubernetes security visibility and detect suspicious container activity faster. By combining runtime monitoring, alert review, MITRE ATT&CK mapping, and AI-assisted reporting, it reduces investigation time and supports faster incident response.
+
+The project also demonstrates repeatable cloud security deployment patterns. This makes it easier for teams to build, validate, and document security monitoring capabilities across cloud environments.
+
+## Architecture Overview
+
+The architecture combines AWS infrastructure, Amazon EKS, Kubernetes runtime monitoring, Falco detections, Falcosidekick alert visibility, Cloudflare DNS, and AI-assisted incident response.
 
 ![AI-Powered EKS Threat Hunting Platform Architecture](img/ai-eks-threat-hunting-platform-diagram.png)
 
-Caption: High-level architecture showing Terraform, AWS, EKS, Falco, Falcosidekick, Cloudflare DNS, and the AI-powered triage workflow.
+Caption: End-to-end architecture showing AWS, Amazon EKS, Falco runtime security, Falcosidekick, Cloudflare, AI-powered alert triage, automated incident reporting, and future CI/CD integration.
+
+## Architecture Workflow
+
+```text
+User Activity
+  -> Amazon EKS
+  -> Falco Runtime Detection
+  -> Falcosidekick
+  -> Dashboard Visibility
+  -> AI Triage
+  -> Incident Response
+```
 
 ## Technology Stack
 
-| Category | Technologies |
-| -------- | ------------ |
-| Cloud | AWS, Amazon EKS, Amazon S3, Amazon DynamoDB, AWS IAM, AWS Load Balancer, AWS Certificate Manager |
-| Infrastructure as Code | Terraform |
-| Container Orchestration | Kubernetes, kubectl |
-| Security Monitoring | Falco, Falcosidekick |
-| DNS and Access | Cloudflare DNS, Amazon Route 53, HTTPS |
-| Detection Framework | MITRE ATT&CK |
-| Automation and Tooling | Helm, Docker, Git, GitHub Actions |
-| AI Workflow | OpenAI-assisted alert triage and incident reporting |
+| Technology | Purpose | Business Benefit |
+| ---------- | ------- | ---------------- |
+| AWS | Cloud infrastructure platform | Provides scalable cloud services for the security platform |
+| Amazon EKS | Managed Kubernetes service | Reduces operational overhead for Kubernetes workloads |
+| Kubernetes | Container orchestration | Runs and manages containerized applications |
+| Terraform | Infrastructure as Code | Enables repeatable infrastructure deployment |
+| Amazon S3 | Terraform remote state storage | Centralizes infrastructure state management |
+| Amazon DynamoDB | Terraform state locking | Prevents conflicting infrastructure updates |
+| AWS IAM | Access control | Supports least-privilege cloud permissions |
+| AWS Load Balancer | External service access | Exposes the Falcosidekick UI through managed AWS networking |
+| AWS Certificate Manager | TLS certificate management | Supports encrypted HTTPS access |
+| Amazon Route 53 | DNS and validation records | Supports certificate validation and DNS workflows |
+| Cloudflare DNS | Public DNS management | Routes user traffic to the security dashboard |
+| Falco | Runtime threat detection | Detects suspicious container behavior in real time |
+| Falcosidekick | Alert forwarding and UI | Makes Falco alerts easier to review |
+| Redis | Falcosidekick UI data support | Supports alert visibility and dashboard operations |
+| Kubernetes Metadata Collector | Workload context enrichment | Adds Kubernetes context to security events |
+| CloudWatch | AWS monitoring and logs | Improves operational visibility |
+| VPC Flow Logs | Network flow visibility | Supports cloud network investigation |
+| KMS | Key management | Supports encryption and data protection |
+| Helm | Kubernetes package deployment | Simplifies application installation and updates |
+| Docker | Container tooling | Supports containerized workload testing |
+| Python | Alert triage automation | Converts alert data into incident reports |
+| GitHub Actions | Future CI/CD automation | Supports repeatable validation and deployment workflows |
+| MITRE ATT&CK | Threat mapping framework | Connects detections to known adversary techniques |
 
 ## Completed Milestones
 
-- Created Terraform remote backend with S3 and DynamoDB.
-- Deployed Amazon EKS cluster.
-- Provisioned and validated managed worker nodes.
-- Installed Falco and Falcosidekick.
-- Exposed Falcosidekick UI through an AWS Load Balancer.
-- Configured Cloudflare DNS for `falco.caremedix.net`.
-- Validated HTTPS access to the Falcosidekick UI.
-- Tested runtime detections successfully.
-- Mapped key detections to MITRE ATT&CK techniques.
+- [x] Terraform remote backend using S3 and DynamoDB
+- [x] Amazon EKS cluster deployed
+- [x] Managed worker nodes validated
+- [x] Falco runtime security installed
+- [x] Falcosidekick UI deployed
+- [x] AWS Load Balancer configured
+- [x] Cloudflare DNS configured
+- [x] Route 53 validation completed
+- [x] HTTPS access validated
+- [x] Runtime detection testing completed
+- [x] MITRE ATT&CK mapping completed
+- [x] AI triage engine created
+- [x] Automated Markdown incident reports generated
+- [x] GitHub repository cleaned and synchronized
 
 ## Deployment Validation Evidence
 
@@ -55,97 +97,119 @@ Caption: High-level architecture showing Terraform, AWS, EKS, Falco, Falcosideki
 
 ![S3 Terraform Backend Bucket](img/s3-ai-eks-threat-hunting-platform.png)
 
-Caption: Amazon S3 bucket created for Terraform remote state storage.
+Caption: Amazon S3 bucket used for Terraform remote state storage.
 
 ![DynamoDB Terraform Lock Table](img/ai-eks-threat-hunting-platform-tf-locks-dev-dynamo-db.png)
 
-Caption: DynamoDB table created for Terraform state locking.
+Caption: DynamoDB table used for Terraform state locking to prevent conflicting infrastructure updates.
 
-### Amazon EKS
+### Amazon EKS Deployment
 
 ![Terraform EKS Apply Complete](img/aws-eks-apply-complete.png)
 
-Caption: Terraform completed the EKS infrastructure deployment.
+Caption: Terraform deployment completed successfully for the Amazon EKS infrastructure.
 
 ![EKS Managed Worker Nodes](img/ai-eks-threat-hunting-platform-workers.png)
 
-Caption: Amazon EKS managed worker nodes running successfully.
+Caption: Amazon EKS managed worker nodes joined the cluster and are running successfully.
 
-### Domain and HTTPS Access
+### AWS Load Balancer
+
+![AWS Classic Load Balancer](img/aws-classic-load-balancer.png)
+
+Caption: AWS Load Balancer exposing the Falcosidekick UI for external access.
+
+### DNS and HTTPS Validation
 
 ![Cloudflare CNAME Record](img/cname-falco-caremedix-net.png)
 
-Caption: Cloudflare DNS configured for the Falcosidekick UI hostname.
+Caption: Cloudflare DNS record configured to route traffic to the AWS Load Balancer.
 
-![Route 53 Domain Validation](img/route-53-falco-caremedix-net.png)
+![Route 53 Certificate Validation](img/route-53-falco-caremedix-net.png)
 
-Caption: Route 53 DNS validation supporting domain and certificate configuration.
+Caption: Route 53 validation records supporting certificate validation.
+
+![Cloudflare ACM Validation Record](img/route-53-cname-cloudflare.png)
+
+Caption: Cloudflare CNAME record used for AWS certificate validation.
 
 ![DNS Resolution Validation](img/nslookup-falco-caremedix-net.png)
 
-Caption: DNS resolution validated for `falco.caremedix.net`.
+Caption: DNS lookup confirming that the validation record resolves correctly.
 
 ![Falcosidekick UI Login](img/falco-login.png)
 
-Caption: Falcosidekick UI accessible through the custom domain over HTTPS.
+Caption: Falcosidekick UI accessible through HTTPS using the custom domain.
 
-## Runtime Threat Detection Demo
+## Runtime Threat Detection Demonstration
 
-Falco was used to detect suspicious runtime behavior inside Kubernetes workloads. The detections were validated through controlled test activity and mapped to MITRE ATT&CK techniques.
+Falco was used to detect suspicious runtime behavior inside Kubernetes workloads. The detections were generated through controlled testing and mapped to MITRE ATT&CK techniques.
 
 ### Detection 1: Terminal Shell in Container
 
-![MITRE ATT&CK T1059 CLI Test](img/mitre-attack-t1059-cli.png)
+MITRE ATT&CK: T1059 - Command and Scripting Interpreter
 
-Caption: Test activity triggering terminal shell behavior inside a container.
+![MITRE ATT\&CK T1059 CLI Test](img/mitre-attack-t1059-cli.png)
+
+Caption: Falco log output showing shell activity mapped to MITRE ATT&CK T1059.
 
 ![Falco Detection for T1059](img/mitre-attack-t1059.png)
 
-Caption: Falco detected shell activity mapped to MITRE ATT&CK T1059.
+Caption: Falcosidekick UI showing the Terminal Shell in Container detection mapped to T1059.
+
+Simple Explanation: A command shell was launched inside a running container. Falco detected the activity, mapped it to MITRE ATT&CK T1059, and generated a security alert.
 
 ### Detection 2: File Write Under `/etc`
 
+MITRE ATT&CK: T1037 - Boot or Logon Initialization Scripts
+
 ![Falco Detection for T1037](img/mitre-attack-t1037.png)
 
-Caption: Falco detected a file write under `/etc`, mapped to MITRE ATT&CK T1037.
+Caption: Falcosidekick UI showing a file write under `/etc` mapped to MITRE ATT&CK T1037.
+
+Simple Explanation: A file modification occurred within the `/etc` directory of a container. Falco detected the activity and generated a security alert.
 
 ## MITRE ATT&CK Mapping
 
-| Technique | Detection | Security Outcome |
-| --------- | --------- | ---------------- |
-| T1059 | Terminal shell in container | Identifies command execution activity inside a running workload. |
-| T1037 | File write under `/etc` inside container | Highlights suspicious system configuration or persistence-related behavior. |
+| Technique | Description | Detection | Security Value |
+| --------- | ----------- | --------- | -------------- |
+| T1059 | Command and Scripting Interpreter | Terminal Shell in Container | Detects command execution inside a running workload |
+| T1037 | Boot or Logon Initialization Scripts | File Write Under `/etc` | Detects suspicious system configuration or persistence-related behavior |
 
 ## Security Outcomes
 
 This project demonstrates practical cloud security outcomes:
 
-- Runtime visibility across Kubernetes workloads
-- Detection of suspicious container shell activity
-- Detection of sensitive system path modification attempts
+- Kubernetes runtime visibility
+- Detection of suspicious shell activity
+- Detection of file modification under sensitive paths
 - Alert review through Falcosidekick UI
-- Public dashboard access through controlled DNS and HTTPS configuration
+- DNS and HTTPS validation for dashboard access
 - MITRE ATT&CK-aligned detection documentation
-- Repeatable infrastructure and security deployment patterns
+- AI-assisted incident response workflow
 
 ## Repository Structure
 
 | Path | Purpose |
 | ---- | ------- |
 | `terraform/backend` | Terraform remote state backend using S3 and DynamoDB |
-| `terraform/eks` | Amazon EKS foundation using an existing AWS VPC |
+| `terraform/eks` | Amazon EKS infrastructure deployment |
 | `falco/helm` | Falco and Falcosidekick Helm values |
 | `falco/rules` | Custom Falco runtime detection rules |
-| `scripts` | Operational scripts for installation and detection testing |
+| `ai-triage` | Python-based alert triage engine |
+| `ai-triage/sample-alerts` | Sample Falco-style alerts for testing |
+| `ai-triage/reports` | Generated Markdown incident reports |
+| `scripts` | Operational scripts for setup and testing |
 | `docs` | Supporting documentation |
 | `src` | Project writeups and deployment notes |
 | `img` | Portfolio screenshots and validation evidence |
+| `.github/workflows` | Future CI/CD automation workflows |
 
 ## AI-Powered Alert Triage
 
-The AI triage engine reads Falco-style alerts, identifies the severity, maps the event to MITRE ATT&CK, creates a plain-English summary, recommends response actions, and automatically saves a Markdown incident report.
+The AI triage engine reads Falco-style alerts, identifies severity, maps the event to MITRE ATT&CK, creates a plain-English summary, recommends response actions, and automatically saves a Markdown incident report.
 
-This phase turns raw runtime security alerts into information that is easier for analysts, engineers, and stakeholders to understand.
+This workflow helps analysts and engineers move from raw alert data to clear response guidance faster. It also creates documentation that can be shared with technical and non-technical stakeholders.
 
 Workflow:
 
@@ -170,7 +234,7 @@ Run one alert:
 python3 ai-triage/triage.py ai-triage/sample-alerts/terminal-shell-t1059.json
 ```
 
-Generated reports are saved under:
+Generated reports:
 
 ```text
 ai-triage/reports/incident-<timestamp>.md
@@ -180,26 +244,37 @@ Both single-alert and multi-alert report generation were validated.
 
 ## Lessons Learned
 
-Key lessons from this project:
-
-- Kubernetes runtime security requires visibility into real workload behavior, not only infrastructure configuration.
+- Kubernetes runtime security requires real workload visibility.
 - Terraform remote state should be protected with encryption, versioning, and state locking.
-- EKS worker node networking must support required outbound access for image pulls and cluster operations.
-- Public DNS should point to public load balancer DNS names, not private IP addresses.
-- Helm-managed services should be updated through Helm values when possible to reduce configuration drift.
-- Detection engineering is stronger when mapped to attacker techniques and response workflows.
+- EKS worker node networking must support required cluster operations.
+- Public DNS should point to public load balancer DNS names.
+- Helm-managed services should be updated carefully to avoid drift.
+- Detection engineering is stronger when mapped to MITRE ATT&CK.
+- AI-assisted triage helps convert raw alerts into actionable incident reports.
+
+## Future Enhancements Roadmap
+
+- AI-Powered Alert Triage
+- Automated Incident Reports
+- Slack notifications
+- Microsoft Teams notifications
+- Security dashboards
+- Threat Intelligence Enrichment
+- GitHub Actions CI/CD
+- Automated Security Testing
 
 ## References
 
 | Tool / Service | Purpose | Official Documentation |
 | -------------- | ------- | ---------------------- |
 | Terraform | Infrastructure as Code | [Terraform Documentation](https://developer.hashicorp.com/terraform/docs) |
+| AWS | Cloud services platform | [AWS Documentation](https://docs.aws.amazon.com/) |
 | Amazon EKS | Managed Kubernetes service | [Amazon EKS Documentation](https://docs.aws.amazon.com/eks/) |
 | Amazon S3 | Remote state storage | [Amazon S3 Documentation](https://docs.aws.amazon.com/s3/) |
 | Amazon DynamoDB | Terraform state locking | [Amazon DynamoDB Documentation](https://docs.aws.amazon.com/dynamodb/) |
 | AWS IAM | Identity and access management | [AWS IAM Documentation](https://docs.aws.amazon.com/iam/) |
 | AWS Load Balancer | Public service exposure | [Elastic Load Balancing Documentation](https://docs.aws.amazon.com/elasticloadbalancing/) |
-| AWS Certificate Manager (ACM) | TLS certificate management | [ACM Documentation](https://docs.aws.amazon.com/acm/) |
+| AWS Certificate Manager | TLS certificate management | [ACM Documentation](https://docs.aws.amazon.com/acm/) |
 | Amazon Route 53 | AWS DNS service | [Route 53 Documentation](https://docs.aws.amazon.com/route53/) |
 | Cloudflare DNS | Domain DNS management | [Cloudflare DNS Documentation](https://developers.cloudflare.com/dns/) |
 | Kubernetes | Container orchestration | [Kubernetes Documentation](https://kubernetes.io/docs/) |
@@ -207,17 +282,22 @@ Key lessons from this project:
 | Helm | Kubernetes package management | [Helm Documentation](https://helm.sh/docs/) |
 | Falco | Runtime threat detection | [Falco Documentation](https://falco.org/docs/) |
 | Falcosidekick | Falco alert forwarding and UI | [Falcosidekick Documentation](https://github.com/falcosecurity/falcosidekick) |
+| Redis | Data store used by Falcosidekick UI | [Redis Documentation](https://redis.io/docs/latest/) |
+| CloudWatch | AWS monitoring and logging | [CloudWatch Documentation](https://docs.aws.amazon.com/cloudwatch/) |
+| VPC Flow Logs | Network traffic visibility | [VPC Flow Logs Documentation](https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html) |
+| AWS KMS | Key management and encryption | [AWS KMS Documentation](https://docs.aws.amazon.com/kms/) |
 | MITRE ATT&CK | Threat technique mapping | [MITRE ATT&CK](https://attack.mitre.org/) |
 | GitHub Actions | CI/CD automation | [GitHub Actions Documentation](https://docs.github.com/actions) |
 | Docker | Container tooling | [Docker Documentation](https://docs.docker.com/) |
+| Python | Automation and scripting | [Python Documentation](https://docs.python.org/3/) |
 | OpenAI | AI-assisted triage workflows | [OpenAI Documentation](https://platform.openai.com/docs) |
 | Git | Version control | [Git Documentation](https://git-scm.com/doc) |
 
 ## Acknowledgements
 
-This project was built using open-source technologies and cloud services provided by AWS, Kubernetes, Falco, Cloudflare, HashiCorp, GitHub, MITRE, and OpenAI.
+This project was built using open-source technologies and cloud services from AWS, Kubernetes, Falco, Cloudflare, HashiCorp, GitHub, MITRE, and OpenAI.
 
-Special thanks to the communities and maintainers who provide documentation, tutorials, and best practices that support continuous learning and innovation.
+Thank you to the maintainers and communities who provide documentation, tooling, and best practices that support cloud security engineering and continuous learning.
 
 ## Author
 
@@ -228,26 +308,28 @@ Cloud Security | Kubernetes | DevSecOps | Threat Detection | Incident Response
 LinkedIn:
 [https://www.linkedin.com/in/james-allen-morta-banday-62a391128/](https://www.linkedin.com/in/james-allen-morta-banday-62a391128/)
 
-GitHub Repository:
+GitHub:
 [https://github.com/jbanday808/ai-eks-threat-hunting-platform](https://github.com/jbanday808/ai-eks-threat-hunting-platform)
 
 ## Portfolio Summary
 
-This project demonstrates hands-on experience with:
+This project demonstrates hands-on experience with AWS, Terraform, Amazon EKS, Kubernetes, Falco, threat detection, incident response, MITRE ATT&CK, DevSecOps, and cloud security.
 
-- Amazon Web Services (AWS)
-- Terraform
-- Infrastructure as Code (IaC)
+Simple Explanation: This project shows how cloud environments can be monitored for suspicious activity, helping organizations improve visibility, strengthen security, and respond to threats faster.
+
+## Skills Demonstrated
+
+- AWS Cloud Security
 - Amazon EKS
 - Kubernetes Administration
+- Terraform
+- Infrastructure as Code
 - Runtime Threat Detection
 - Falco Security Monitoring
-- Incident Response Workflows
-- MITRE ATT&CK Mapping
-- Cloud Security Operations
-- DevSecOps Practices
+- Falcosidekick Alert Visibility
+- MITRE ATT&CK Framework
+- Incident Response
+- Python Automation
+- DevSecOps
+- Cloud Operations
 - Technical Documentation
-
-Simple explanation:
-
-This project showcases how modern cloud environments can be monitored for suspicious activity, helping organizations improve visibility, strengthen security, and respond to threats more effectively.
