@@ -4,9 +4,13 @@
 
 The AI-Powered EKS Threat Hunting & Incident Response Platform is a cloud security project that monitors Kubernetes workloads running on Amazon EKS. It combines infrastructure automation, runtime threat detection, alert visibility, secure access, and future AI-powered triage.
 
-![AI-Powered EKS Threat Hunting & Incident Response Platform Architecture](../img/ai-eks-threat-hunting-platform-diagram.png)
+![High-Level Architecture](../img/ai-eks-threat-hunting-platform-simple-diagram.png)
 
-*Figure 1. End-to-end architecture showing Terraform, AWS, Amazon EKS, Falco runtime security, Falcosidekick, Cloudflare DNS, AI-powered alert triage, automated incident reporting, and future CI/CD integration.*
+*Figure 1. High-level view of the AI-Powered EKS Threat Hunting & Cloud Incident Response Platform showing GitHub Actions CI/CD, security validation, container security, runtime threat detection, AI triage, and cloud incident response.*
+
+![Detailed Architecture](../img/ai-eks-threat-hunting-platform-detailed-diagram.png)
+
+*Figure 2. End-to-end DevSecOps workflow including GitHub Actions, OIDC authentication, Terraform validation, Python testing, CodeQL, Trivy, SBOM generation, Docker image build, Amazon ECR, Amazon EKS deployment, AWS Security Agent, GuardDuty runtime monitoring, AI triage, and incident response.*
 
 ### Architecture Overview
 
