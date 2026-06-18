@@ -95,7 +95,7 @@ Figure 4. Amazon ECR stores the Docker image for the AI triage workload.
 
 ![Figure 5. GitHub Repository Variables](img/aws-github-repo-variables.png)
 
-Figure 5. GitHub repository variables store non-secret deployment configuration for the CI/CD workflows.
+Figure 5. GitHub repository variables securely provide AWS and deployment settings to GitHub Actions workflows.
 
 ![Figure 6. AWS GuardDuty Security Agent](img/aws-guard-duty-agent.png)
 
