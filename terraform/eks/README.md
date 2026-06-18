@@ -2,32 +2,31 @@
 
 This directory creates the Phase 2 Amazon EKS foundation for the `ai-eks-threat-hunting-platform` project.
 
-It reuses the existing AWS VPC and subnet IDs provided for the project. It does not create, delete, or modify the VPC.
+It creates its own VPC, public subnets, private subnets, routing, NAT gateway, EKS control plane, and EKS managed node group. It does not depend on pre-existing VPC or subnet IDs in the AWS account.
 
 ## Resources
 
 | Resource | Purpose |
 | --- | --- |
+| `aws_vpc.this` | Creates the Terraform-managed VPC for EKS. |
+| `aws_subnet.public` | Creates public subnets across Availability Zones. |
+| `aws_subnet.private` | Creates private subnets across Availability Zones for EKS worker nodes. |
+| `aws_internet_gateway.this` | Provides internet routing for public subnets. |
+| `aws_nat_gateway.this` | Provides outbound internet access for private worker nodes. |
+| `aws_route_table.*` | Creates public and private subnet routing. |
 | `aws_eks_cluster.this` | Creates the EKS control plane named `ai-eks-threat-hunting-platform`. |
-| `aws_eks_node_group.this` | Creates an EKS managed node group in the existing private subnets. |
+| `aws_eks_node_group.this` | Creates an EKS managed node group in the Terraform-managed private subnets. |
 | `aws_iam_role.eks_cluster` | IAM role assumed by the EKS control plane. |
 | `aws_iam_role.eks_node_group` | IAM role assumed by EKS worker nodes. |
 | `aws_iam_role_policy_attachment.*` | Attaches required AWS managed policies for EKS and worker nodes. |
-
-## Existing AWS Resources
-
-| Name | Value |
-| --- | --- |
-| VPC ID | `vpc-0b7f09564a1afc93e` |
-| Private subnets | `subnet-0004aa53c6d591fce`, `subnet-0ef16951aac00ad50` |
-| Public subnets | `subnet-0dacf6eeb8374b21f`, `subnet-01aad51c5b7017fba` |
-| Application security group | `sg-017d7df603788fa47` |
 
 ## Defaults
 
 | Setting | Value |
 | --- | --- |
 | AWS region | `us-east-1` |
+| VPC CIDR | `10.50.0.0/16` |
+| Availability Zones | `2` |
 | EKS cluster name | `ai-eks-threat-hunting-platform` |
 | Node group name | `ai-eks-threat-hunting-platform-workers` |
 | Worker instance type | `t3.medium` |

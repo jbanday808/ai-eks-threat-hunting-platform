@@ -1,0 +1,2 @@
+04:06:39.002462668: Notice A shell was spawned in a container with an attached terminal | evt_type=execve user=root user_uid=0 user_loginuid=-1 process=sh proc_exepath=/usr/bin/dash parent=containerd-shim command=sh terminal=34816 exe_flags=EXE_WRITABLE|EXE_LOWER_LAYER container_id=ab2164b2da12 container_name=nginx container_image_repository=docker.io/library/nginx container_image_tag=latest k8s_pod_name=nginx-56c45fd5ff-cgzsb k8s_ns_name=detection-lab
+Thu Jun 18 03:56:37 2026:    /etc/falco/falco_rules.yaml | schema validation: ok

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-triage
+  namespace: detection-lab
+  labels:
+    app: ai-triage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ai-triage
+  template:
+    metadata:
+      labels:
+        app: ai-triage
+    spec:
+      containers:
+        - name: ai-triage
+          image: REPLACE_IMAGE
+          imagePullPolicy: Always
+          command:
+            - /bin/sh
+            - -c
+          args:
+            - python3 ai-triage/triage.py && sleep infinity

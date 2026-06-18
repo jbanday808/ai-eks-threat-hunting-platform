@@ -16,34 +16,21 @@ variable "environment" {
   default     = "dev"
 }
 
-variable "vpc_id" {
-  description = "Existing VPC ID where the EKS cluster will run."
+variable "vpc_cidr" {
+  description = "CIDR block for the Terraform-managed EKS VPC."
   type        = string
-  default     = "vpc-0b7f09564a1afc93e"
+  default     = "10.50.0.0/16"
 }
 
-variable "private_subnet_ids" {
-  description = "Existing private subnet IDs for the EKS managed node group."
-  type        = list(string)
-  default = [
-    "subnet-0004aa53c6d591fce",
-    "subnet-0ef16951aac00ad50"
-  ]
-}
+variable "az_count" {
+  description = "Number of Availability Zones to use for public and private EKS subnets."
+  type        = number
+  default     = 2
 
-variable "public_subnet_ids" {
-  description = "Existing public subnet IDs available to the EKS control plane."
-  type        = list(string)
-  default = [
-    "subnet-0dacf6eeb8374b21f",
-    "subnet-01aad51c5b7017fba"
-  ]
-}
-
-variable "application_security_group_id" {
-  description = "Existing application security group ID to associate with the EKS control plane."
-  type        = string
-  default     = "sg-017d7df603788fa47"
+  validation {
+    condition     = var.az_count >= 2
+    error_message = "EKS requires at least two Availability Zones."
+  }
 }
 
 variable "node_instance_types" {

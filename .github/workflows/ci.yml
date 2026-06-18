@@ -1,0 +1,56 @@
+name: CI Validation
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  python:
+    name: Python validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile triage script
+        run: python3 -m py_compile ai-triage/triage.py
+      - name: Run triage script
+        run: python3 ai-triage/triage.py
+      - name: Install pytest
+        run: python3 -m pip install --upgrade pip pytest
+      - name: Run tests
+        run: pytest tests -v
+
+  terraform:
+    name: Terraform validation
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        terraform_dir:
+          - terraform/backend
+          - terraform/eks
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+      - name: Terraform fmt
+        working-directory: ${{ matrix.terraform_dir }}
+        run: terraform fmt -check
+      - name: Terraform init without backend
+        working-directory: ${{ matrix.terraform_dir }}
+        run: terraform init -backend=false
+      - name: Terraform validate
+        working-directory: ${{ matrix.terraform_dir }}
+        run: terraform validate

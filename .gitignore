@@ -7,3 +7,4 @@
 .env
 __pycache__/
 *.pyc
+ai-triage/reports/incident-*.md
