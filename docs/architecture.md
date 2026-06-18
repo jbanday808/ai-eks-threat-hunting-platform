@@ -6,7 +6,7 @@ The AI-Powered EKS Threat Hunting & Cloud Incident Response Platform is a DevSec
 
 ### High-Level Architecture
 
-![High-Level Architecture](../img/ai-eks-threat-hunting-platform-simple-diagram.png)
+![High-Level Architecture](../img/ai-eks-threat-hunting-platform-diagram-v2.png)
 
 Figure 1. High-level view of the AI-Powered EKS Threat Hunting & Cloud Incident Response Platform showing GitHub Actions CI/CD, security validation, container security, runtime threat detection, AI triage, and cloud incident response.
 
