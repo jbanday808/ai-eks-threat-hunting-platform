@@ -1,20 +1,20 @@
 # AI-Powered EKS Threat Hunting & Cloud Incident Response Platform
 
-This project demonstrates a completed DevSecOps and runtime security workflow for Amazon EKS. It combines GitHub Actions, GitHub OIDC, Terraform validation, Python testing, CodeQL, Trivy, SBOM generation, Docker, Amazon ECR, Amazon EKS, Falco, AWS Security Agent, GuardDuty Runtime Monitoring, AI threat triage, and cloud incident response reporting.
+## Executive Summary
+
+This project demonstrates a completed cloud security and DevSecOps platform for Amazon EKS. It uses GitHub Actions, GitHub OIDC, Terraform, Python, Pytest, CodeQL, Trivy, SBOM generation, Docker, Amazon ECR, Amazon EKS, Falco, AWS Security Agent, GuardDuty Runtime Monitoring, AI threat triage, and cloud incident response reporting.
+
+The platform validates code and infrastructure, builds and scans container images, deploys the AI triage workload to EKS, detects runtime threats, maps alerts to MITRE ATT&CK, and generates incident response reports.
 
 ## Architecture Diagrams
 
-### High-Level Architecture
+![Figure 1. High-Level Architecture](img/ai-eks-threat-hunting-platform-diagram-v2.png)
 
-![High-Level Architecture](img/ai-eks-threat-hunting-platform-simple-diagram.png)
+Figure 1. High-level view of the platform showing CI/CD, security validation, runtime detection, AI triage, and incident response.
 
-Figure 1. High-level view of the AI-Powered EKS Threat Hunting & Cloud Incident Response Platform showing GitHub Actions CI/CD, security validation, container security, runtime threat detection, AI triage, and cloud incident response.
+![Figure 2. Detailed DevSecOps Architecture](img/ai-eks-threat-hunting-platform-detailed-diagram.png)
 
-### Detailed DevSecOps Architecture
-
-![Detailed Architecture](img/ai-eks-threat-hunting-platform-detailed-diagram.png)
-
-Figure 2. End-to-end DevSecOps workflow including GitHub Actions, OIDC authentication, Terraform validation, Python testing, CodeQL, Trivy, SBOM generation, Docker image build, Amazon ECR, Amazon EKS deployment, AWS Security Agent, GuardDuty runtime monitoring, AI triage, and incident response.
+Figure 2. Detailed DevSecOps workflow from GitHub Actions through EKS deployment, GuardDuty monitoring, AI triage, and incident response.
 
 ## Architecture Workflow
 
@@ -42,86 +42,92 @@ Git Push
 
 | Technology | Purpose |
 | --- | --- |
-| Terraform | Builds the EKS foundation and supporting AWS infrastructure. |
-| GitHub Actions | Automates CI/CD, validation, scanning, image build, and deployment. |
-| GitHub OIDC | Provides short-lived AWS authentication without long-term access keys. |
-| Pytest | Validates AI triage behavior with unit tests. |
-| CodeQL | Performs static analysis for Python code. |
-| Trivy | Scans the filesystem and container images for vulnerabilities. |
-| SBOM | Documents software components in CycloneDX format. |
-| Docker | Packages the AI triage workload as a container image. |
-| Amazon ECR | Stores validated container images. |
-| Amazon EKS | Runs Kubernetes workloads and runtime security tooling. |
-| Falco | Provides open-source runtime threat detection. |
-| AWS Security Agent | Supports AWS-native runtime visibility on EKS worker nodes. |
-| AWS GuardDuty Runtime Monitoring | Produces AWS-native runtime security findings. |
-| Python | Powers AI-assisted alert triage and incident report generation. |
-| MITRE ATT&CK | Maps detections to known adversary techniques. |
+| AWS | Cloud platform for the EKS security environment. |
+| Amazon EKS | Managed Kubernetes platform for container workloads. |
+| Amazon ECR | Container registry for AI triage images. |
+| Amazon VPC | Networking foundation for the EKS environment. |
+| Amazon S3 | Terraform remote state storage. |
+| Amazon DynamoDB | Terraform state locking. |
+| AWS IAM | Role and policy management for AWS access. |
+| GitHub Actions | CI/CD automation for validation, scanning, image build, and deployment. |
+| GitHub OIDC | Short-lived AWS authentication without long-term access keys. |
+| Terraform | Infrastructure as Code for AWS resources. |
+| Kubernetes | Container orchestration through Amazon EKS. |
+| kubectl | Kubernetes resource management. |
+| Docker | Container packaging for the AI triage workload. |
+| Python | Alert triage and incident report generation. |
+| Pytest | Unit testing for the AI triage workflow. |
+| CodeQL | Static analysis for Python code. |
+| Trivy | Filesystem and image vulnerability scanning. |
+| CycloneDX SBOM | Software component inventory format. |
+| Falco | Open-source runtime threat detection. |
+| AWS GuardDuty Runtime Monitoring | AWS-native runtime threat detection for EKS. |
+| AWS Security Agent | GuardDuty runtime visibility on EKS worker nodes. |
+| MITRE ATT&CK | Detection mapping to adversary techniques. |
 
 ## Completed Milestones
 
 - GitHub Actions CI/CD
 - GitHub OIDC Authentication
+- Terraform Validation
+- Python Validation
+- AI Triage Unit Testing
 - CodeQL Static Analysis
 - Trivy Security Scanning
 - SBOM Generation
 - Docker Build Pipeline
 - Amazon ECR Integration
 - Amazon EKS Deployment Pipeline
+- AWS Security Agent Validation
 - GuardDuty Runtime Monitoring
-- AWS Security Agent
 - Falco Runtime Detection Validation
-- AI Triage Unit Testing
+- AI Incident Report Generation
 
 ## Deployment Validation Evidence
 
-### EKS Cluster Deployment
+![Figure 3. Terraform-Managed EKS VPC](img/ai-eks-threat-hunting-platform-vpc.png)
 
-![EKS Cluster Deployment](img/aws-eks-apply-complete.png)
+Figure 3. Terraform created the VPC networking foundation used by the EKS environment.
 
-Terraform successfully deployed the Amazon EKS cluster and worker nodes.
+![Figure 4. Amazon ECR Repository](img/ai-eks-triage-ecr.png)
 
-### Amazon ECR Repository
+Figure 4. Amazon ECR stores the Docker image for the AI triage workload.
 
-![Amazon ECR Repository](img/ai-eks-triage-ecr.png)
+![Figure 5. GitHub Repository Variables](img/aws-github-repo-variables.png)
 
-Amazon ECR repository used for storing container images.
+Figure 5. GitHub repository variables store non-secret deployment configuration for the CI/CD workflows.
 
-### GitHub Actions Workflows
+![Figure 6. AWS GuardDuty Security Agent](img/aws-guard-duty-agent.png)
 
-![GitHub Actions Workflows](img/github-workflow.png)
+Figure 6. The AWS Security Agent is healthy and supports GuardDuty Runtime Monitoring on EKS worker nodes.
 
-CI/CD workflows automate testing, security validation, image builds, and deployments.
+![Figure 7. AI Triage Workload Deployment](img/deploy-ai-triage-workload-success.png)
 
-### GitHub OIDC Configuration
+Figure 7. GitHub Actions successfully deployed the AI triage workload to Amazon EKS.
 
-![GitHub OIDC Configuration](img/aws-github-repo-variables.png)
+![Figure 8. GitHub Actions Workflows](img/github-workflow.png)
 
-GitHub Actions uses OIDC federation and temporary credentials instead of long-lived AWS access keys.
+Figure 8. GitHub Actions workflows automate testing, security validation, image builds, and deployments.
 
-### GuardDuty Runtime Monitoring
+![Figure 9. Falco Runtime Test Workload](img/nginx-falco-test.png)
 
-![GuardDuty Runtime Monitoring](img/aws-guard-duty-agent.png)
+Figure 9. A controlled nginx workload was used to test runtime detection behavior.
 
-AWS Security Agent and GuardDuty Runtime Monitoring are enabled and healthy on EKS worker nodes.
+![Figure 10. Falco Runtime Test Results](img/nginx-falco-test-results.png)
 
-### Falco Runtime Detection Test
+Figure 10. The runtime test produced expected Kubernetes activity for detection validation.
 
-![Nginx Falco Test](img/nginx-falco-test.png)
+![Figure 11. Falco Detection Evidence](img/falco-detection-evidence.png)
 
-![Nginx Falco Test Results](img/nginx-falco-test-results.png)
+Figure 11. Falco detected shell activity inside a Kubernetes container and generated a runtime security alert.
 
-![Falco Detection Evidence](img/falco-detection-evidence.png)
+![Figure 12. Pytest Validation](img/pytest-passed.png)
 
-Falco successfully detected shell activity inside a Kubernetes container and generated runtime security alerts.
+Figure 12. Pytest confirmed the AI triage tests passed successfully.
 
-### AI Triage Validation
+![Figure 13. AI Triage Incident Reports](img/python-ai-triage-reports.png)
 
-![Pytest Passed](img/pytest-passed.png)
-
-![Python AI Triage Reports](img/python-ai-triage-reports.png)
-
-Python unit tests passed successfully and incident reports were automatically generated.
+Figure 13. The Python triage workflow generated Markdown incident reports from sample alerts.
 
 ## Security Validation Results
 
@@ -142,7 +148,7 @@ Validated Controls:
 
 ## AI Threat Triage
 
-The Python triage workflow processes Falco-style alerts, extracts Kubernetes context, maps detections to MITRE ATT&CK, recommends response actions, and generates Markdown incident reports.
+The AI triage workflow processes Falco-style alerts, extracts Kubernetes context, maps detections to MITRE ATT&CK, recommends response actions, and generates Markdown incident reports.
 
 ```bash
 python3 -m py_compile ai-triage/triage.py
@@ -192,7 +198,7 @@ This project demonstrates practical implementation of AWS cloud security, Amazon
 ## References
 
 | Tool / Service | Purpose | Official Documentation |
-| --- | --- | --- |
+| ---------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | AWS | Cloud platform used to host the project resources. | https://docs.aws.amazon.com/ |
 | Amazon EKS | Managed Kubernetes service used to run container workloads. | https://docs.aws.amazon.com/eks/ |
 | Amazon ECR | Container registry used to store Docker images. | https://docs.aws.amazon.com/ecr/ |
