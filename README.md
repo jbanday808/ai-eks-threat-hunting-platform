@@ -189,8 +189,40 @@ AWS_ROLE_ARN
 
 This project demonstrates practical implementation of AWS cloud security, Amazon EKS, Kubernetes, Terraform, GitHub Actions, GitHub OIDC, CodeQL, Trivy, SBOM generation, Docker, Amazon ECR, Falco runtime detection, AWS GuardDuty Runtime Monitoring, AI-assisted triage, and cloud incident response.
 
+## References
+
+| Tool / Service | Purpose | Official Documentation |
+| --- | --- | --- |
+| AWS | Cloud platform used to host the project resources. | https://docs.aws.amazon.com/ |
+| Amazon EKS | Managed Kubernetes service used to run container workloads. | https://docs.aws.amazon.com/eks/ |
+| Amazon ECR | Container registry used to store Docker images. | https://docs.aws.amazon.com/ecr/ |
+| AWS IAM | Identity and access management for roles, policies, and OIDC access. | https://docs.aws.amazon.com/iam/ |
+| GitHub OIDC with AWS | Secure authentication from GitHub Actions to AWS without long-term keys. | https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services |
+| GitHub Actions | CI/CD automation for validation, scanning, image build, and EKS deployment. | https://docs.github.com/en/actions |
+| Terraform | Infrastructure as Code tool used to provision AWS resources. | https://developer.hashicorp.com/terraform/docs |
+| Kubernetes | Container orchestration platform used by Amazon EKS. | https://kubernetes.io/docs/ |
+| kubectl | Command-line tool used to manage Kubernetes resources. | https://kubernetes.io/docs/reference/kubectl/ |
+| Docker | Container tooling used to package the AI triage workload. | https://docs.docker.com/ |
+| Python | Programming language used for AI triage and incident report generation. | https://docs.python.org/3/ |
+| Pytest | Testing framework used to validate the AI triage workflow. | https://docs.pytest.org/ |
+| CodeQL | Static analysis tool used to scan code for security issues. | https://codeql.github.com/docs/ |
+| Trivy | Security scanner used for filesystem and container image scanning. | https://aquasecurity.github.io/trivy/ |
+| CycloneDX SBOM | SBOM format used to document software components. | https://cyclonedx.org/docs/ |
+| Falco | Runtime security tool used to detect suspicious container behavior. | https://falco.org/docs/ |
+| AWS GuardDuty | AWS-native threat detection service used for runtime monitoring. | https://docs.aws.amazon.com/guardduty/ |
+| GuardDuty Runtime Monitoring | Runtime monitoring feature used to observe EKS workload behavior. | https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html |
+| AWS Security Agent for EKS | Security agent used by GuardDuty Runtime Monitoring for EKS workloads. | https://docs.aws.amazon.com/guardduty/latest/ug/eks-runtime-monitoring.html |
+| Amazon VPC | Networking foundation used by the EKS environment. | https://docs.aws.amazon.com/vpc/ |
+| Amazon S3 | Storage service used for Terraform remote state. | https://docs.aws.amazon.com/s3/ |
+| Amazon DynamoDB | Database service used for Terraform state locking. | https://docs.aws.amazon.com/dynamodb/ |
+| MITRE ATT&CK | Framework used to map detections to adversary techniques. | https://attack.mitre.org/ |
+
 ## Author
 
 James Banday
 
 Cloud Security | Kubernetes | DevSecOps | Threat Detection | Incident Response
+
+GitHub: https://github.com/jbanday808/ai-eks-threat-hunting-platform/tree/main
+
+LinkedIn: https://www.linkedin.com/in/james-allen-morta-banday-62a391128/
