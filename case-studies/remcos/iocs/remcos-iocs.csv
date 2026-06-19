@@ -1,0 +1,8 @@
+Type,Indicator,Description,Source
+Hash,,Remcos sample hash,
+Domain,,Possible C2 domain,
+IP,,Possible C2 IP,
+Registry,,Persistence registry key,
+File,,Dropped file,
+Process,,Suspicious process,
+Mutex,,Possible malware mutex,

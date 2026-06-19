@@ -1,0 +1,20 @@
+# AgentTesla defensive Suricata detections
+# Source: INC2026-0203-AGENTTESLA
+# Scope: Indicators and behaviors observed in a controlled defensive lab.
+# Purpose: Detect suspicious DNS, HTTP, FTP upload, and file-name indicators from the completed investigation.
+
+alert dns any any -> any any (msg:"MALWARE AgentTesla observed domain corwineagles.com"; dns.query; content:"corwineagles.com"; nocase; classtype:trojan-activity; sid:1000001; rev:1; metadata: malware_family AgentTesla, attack_target Client_Endpoint;)
+
+alert dns any any -> any any (msg:"MALWARE AgentTesla observed FTP domain ftp.corwineagles.com"; dns.query; content:"ftp.corwineagles.com"; nocase; classtype:trojan-activity; sid:1000002; rev:1; metadata: malware_family AgentTesla, attack_target Client_Endpoint;)
+
+alert dns any any -> any any (msg:"MALWARE AgentTesla possible staged delivery via Google Drive domain"; dns.query; content:"drive.google.com"; nocase; classtype:trojan-activity; sid:1000003; rev:1; metadata: malware_family AgentTesla, attack_target Client_Endpoint;)
+
+alert dns any any -> any any (msg:"MALWARE AgentTesla possible staged delivery via drive.usercontent.google.com"; dns.query; content:"drive.usercontent.google.com"; nocase; classtype:trojan-activity; sid:1000004; rev:1; metadata: malware_family AgentTesla, attack_target Client_Endpoint;)
+
+alert http any any -> any any (msg:"MALWARE AgentTesla observed IP lookup host ip-api.com"; http.host; content:"ip-api.com"; nocase; classtype:trojan-activity; sid:1000005; rev:1; metadata: malware_family AgentTesla, attack_target Client_Endpoint;)
+
+alert ftp any any -> any any (msg:"MALWARE AgentTesla possible FTP upload using STOR"; content:"STOR"; nocase; classtype:trojan-activity; sid:1000006; rev:1; metadata: malware_family AgentTesla, mitre_tactic_id TA0010, mitre_technique_id T1048;)
+
+alert ftp-data any any -> any any (msg:"MALWARE AgentTesla possible Thunderbird contact exfil filename"; content:"Contacts_Thunderbird"; nocase; classtype:trojan-activity; sid:1000007; rev:1; metadata: malware_family AgentTesla, mitre_tactic_id TA0009, mitre_technique_id T1005;)
+
+alert ftp-data any any -> any any (msg:"MALWARE AgentTesla possible password file exfil filename"; content:"PW_"; nocase; classtype:trojan-activity; sid:1000008; rev:1; metadata: malware_family AgentTesla, mitre_tactic_id TA0006, mitre_technique_id T1555;)
