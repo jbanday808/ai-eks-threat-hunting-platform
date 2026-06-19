@@ -8,11 +8,11 @@ The platform validates code and infrastructure, builds and scans container image
 
 ## Architecture Diagrams
 
-![Figure 1. High-Level Architecture](img/agenttesla/ai-eks-threat-hunting-platform-diagram-v2.png)
+![Figure 1. High-Level Architecture](img/aiagent/ai-eks-threat-hunting-platform-diagram-v2.png)
 
 Figure 1. High-level view of the platform showing CI/CD, security validation, runtime detection, AI triage, and incident response.
 
-![Figure 2. Detailed DevSecOps Architecture](img/agenttesla/ai-eks-threat-hunting-platform-detailed-diagram.png)
+![Figure 2. Detailed DevSecOps Architecture](img/aiagent/ai-eks-threat-hunting-platform-detailed-diagram.png)
 
 Figure 2. Detailed DevSecOps workflow from GitHub Actions through EKS deployment, GuardDuty monitoring, AI triage, and incident response.
 
@@ -85,47 +85,47 @@ Git Push
 
 ## Deployment Validation Evidence
 
-![Figure 3. Terraform-Managed EKS VPC](img/agenttesla/ai-eks-threat-hunting-platform-vpc.png)
+![Figure 3. Terraform-Managed EKS VPC](img/aiagent/ai-eks-threat-hunting-platform-vpc.png)
 
 Figure 3. Terraform created the VPC networking foundation used by the EKS environment.
 
-![Figure 4. Amazon ECR Repository](img/agenttesla/ai-eks-triage-ecr.png)
+![Figure 4. Amazon ECR Repository](img/aiagent/ai-eks-triage-ecr.png)
 
 Figure 4. Amazon ECR stores the Docker image for the AI triage workload.
 
-![Figure 5. GitHub Repository Variables](img/agenttesla/aws-github-repo-variables.png)
+![Figure 5. GitHub Repository Variables](img/aiagent/aws-github-repo-variables.png)
 
 Figure 5. GitHub repository variables securely provide AWS and deployment settings to GitHub Actions workflows.
 
-![Figure 6. AWS GuardDuty Security Agent](img/agenttesla/aws-guard-duty-agent.png)
+![Figure 6. AWS GuardDuty Security Agent](img/aiagent/aws-guard-duty-agent.png)
 
 Figure 6. The AWS Security Agent is healthy and supports GuardDuty Runtime Monitoring on EKS worker nodes.
 
-![Figure 7. AI Triage Workload Deployment](img/agenttesla/deploy-ai-triage-workload-success.png)
+![Figure 7. AI Triage Workload Deployment](img/aiagent/deploy-ai-triage-workload-success.png)
 
 Figure 7. GitHub Actions successfully deployed the AI triage workload to Amazon EKS.
 
-![Figure 8. GitHub Actions Workflows](img/agenttesla/github-workflow.png)
+![Figure 8. GitHub Actions Workflows](img/aiagent/github-workflow.png)
 
 Figure 8. GitHub Actions workflows automate testing, security validation, image builds, and deployments.
 
-![Figure 9. Falco Runtime Test Workload](img/agenttesla/nginx-falco-test.png)
+![Figure 9. Falco Runtime Test Workload](img/aiagent/nginx-falco-test.png)
 
 Figure 9. A controlled nginx workload was used to test runtime detection behavior.
 
-![Figure 10. Falco Runtime Test Results](img/agenttesla/nginx-falco-test-results.png)
+![Figure 10. Falco Runtime Test Results](img/aiagent/nginx-falco-test-results.png)
 
 Figure 10. The runtime test produced expected Kubernetes activity for detection validation.
 
-![Figure 11. Falco Detection Evidence](img/agenttesla/falco-detection-evidence.png)
+![Figure 11. Falco Detection Evidence](img/aiagent/falco-detection-evidence.png)
 
 Figure 11. Falco detected shell activity inside a Kubernetes container and generated a runtime security alert.
 
-![Figure 12. Pytest Validation](img/agenttesla/pytest-passed.png)
+![Figure 12. Pytest Validation](img/aiagent/pytest-passed.png)
 
 Figure 12. Pytest confirmed the AI triage tests passed successfully.
 
-![Figure 13. AI Triage Incident Reports](img/agenttesla/python-ai-triage-reports.png)
+![Figure 13. AI Triage Incident Reports](img/aiagent/python-ai-triage-reports.png)
 
 Figure 13. The Python triage workflow generated Markdown incident reports from sample alerts.
 

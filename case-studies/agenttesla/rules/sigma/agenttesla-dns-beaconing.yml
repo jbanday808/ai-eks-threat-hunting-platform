@@ -1,0 +1,55 @@
+title: AgentTesla DNS Beaconing and Staging Indicators
+id: 8a6b3f10-5845-4a9b-94cb-2d0ec7f5d8d1
+status: experimental
+description: Detects DNS lookups associated with AgentTesla investigation activity, including suspicious FTP infrastructure, Google Drive staging indicators, and IP lookup behavior.
+author: James Banday
+date: 2026-06-19
+references:
+    - case-studies/agenttesla/reports/incident-report.md
+    - case-studies/agenttesla/reports/splunk-detection.md
+tags:
+    - attack.command-and-control
+    - attack.t1071
+    - attack.t1071.004
+    - attack.t1102
+    - attack.discovery
+    - attack.t1614
+logsource:
+    category: dns
+detection:
+    selection_query:
+        query|endswith:
+            - 'corwineagles.com'
+            - 'ftp.corwineagles.com'
+            - 'drive.google.com'
+            - 'drive.usercontent.google.com'
+            - 'ip-api.com'
+    selection_query_name:
+        QueryName|endswith:
+            - 'corwineagles.com'
+            - 'ftp.corwineagles.com'
+            - 'drive.google.com'
+            - 'drive.usercontent.google.com'
+            - 'ip-api.com'
+    selection_domain:
+        domain|endswith:
+            - 'corwineagles.com'
+            - 'ftp.corwineagles.com'
+            - 'drive.google.com'
+            - 'drive.usercontent.google.com'
+            - 'ip-api.com'
+    condition: 1 of selection_*
+fields:
+    - src_ip
+    - src_host
+    - user
+    - query
+    - QueryName
+    - domain
+    - answer
+    - response_code
+falsepositives:
+    - Legitimate Google Drive access may match staging-related domains.
+    - Security tools or browser activity may generate benign lookups to ip-api.com.
+    - Domain matches should be correlated with beaconing frequency, FTP activity, endpoint telemetry, and other AgentTesla indicators.
+level: high
