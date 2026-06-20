@@ -228,9 +228,9 @@ The sample folder shows how investigation files were separated within the contro
 
 #### Figure 22: Project Structure
 
-![Remcos project folder structure](../../img/remcos/remcos-project-folders.png)
+![Repository structure with AgentTesla and Remcos case-study artifacts](../../img/remcos/remcos-project-folders.png)
 
-The project tree organizes reports, detections, indicators, and evidence into clear defensive-analysis folders.
+Figure 22. Repository structure showing AgentTesla and Remcos malware analysis case studies, detection content, threat intelligence artifacts, screenshots, and supporting security documentation.
 
 #### Figure 23: Pre-Analysis Snapshot
 

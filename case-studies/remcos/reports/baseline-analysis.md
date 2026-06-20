@@ -35,7 +35,7 @@ The baseline capture showed normal system activity, including:
 
 - `img/remcos/remcos-noriben-baseline-report.png`
 - `img/remcos/remcos-noriben-timeline.csv.png`
-- `img/remcos/remcos-project-folders.png`
+- [Updated repository structure](../../../img/remcos/remcos-project-folders.png)
 
 ## Purpose of Baseline
 
