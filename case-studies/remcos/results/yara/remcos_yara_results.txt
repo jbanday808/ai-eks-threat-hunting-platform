@@ -1,0 +1,34 @@
+Remcos YARA Detection Results
+=============================
+
+Result: MATCH
+Rule: Remcos_Combined_Static_IOC
+
+Matched Indicators
+------------------
+
+- UPX0
+- UPX1
+- UPX!
+- LoadLibraryA
+- GetProcAddress
+- VirtualAlloc
+- URLDownloadToFileA
+- InternetOpenA
+
+Summary
+-------
+
+The custom Remcos_Combined_Static_IOC YARA rule matched the sample successfully.
+The UPX markers show that the program is packed, which can make its contents
+harder to inspect. The matched Windows functions can load program components,
+allocate memory, and access or download content from the internet. Together,
+these findings identify characteristics commonly associated with packed malware
+and suspicious program behavior. Each indicator can also appear in legitimate
+software, so defenders should review the combined evidence and system context.
+
+Figure Caption
+--------------
+
+img/remcos/yara-rule-remcos-results.png — The screenshot shows the custom YARA
+rule matching the Remcos sample and listing the validated static indicators.

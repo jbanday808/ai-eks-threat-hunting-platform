@@ -1,0 +1,17 @@
+# Remcos RAT defensive Suricata detections
+# Purpose: Alert defenders when monitored systems query or contact infrastructure identified during the completed Remcos investigation.
+# Scope: Threat intelligence indicators only; an alert should be confirmed with endpoint, DNS, and time-based evidence.
+# ATT&CK: Command and Control - Application Layer Protocol (T1071), including DNS (T1071.004) and Web Protocols (T1071.001).
+# Note: The IP addresses may host unrelated services, so IP-only alerts can produce false positives.
+
+# Detect a DNS request for the investigated Remcos-related domain.
+alert dns $HOME_NET any -> $EXTERNAL_NET any (msg:"MALWARE Remcos RAT threat intelligence domain in DNS query"; dns.query; content:"eastvillageeatery.de"; nocase; endswith; classtype:trojan-activity; reference:url,www.virustotal.com/gui/domain/eastvillageeatery.de; reference:url,attack.mitre.org/techniques/T1071/004/; metadata: malware_family Remcos_RAT, confidence High, mitre_tactic_id TA0011, mitre_technique_id T1071.004, created_at 2026_06_19; sid:1000101; rev:1;)
+
+# Detect the same domain when it appears as an unencrypted HTTP host.
+alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"MALWARE Remcos RAT threat intelligence domain in HTTP host"; flow:established,to_server; http.host; content:"eastvillageeatery.de"; nocase; endswith; classtype:trojan-activity; reference:url,www.virustotal.com/gui/domain/eastvillageeatery.de; reference:url,attack.mitre.org/techniques/T1071/001/; metadata: malware_family Remcos_RAT, confidence High, mitre_tactic_id TA0011, mitre_technique_id T1071.001, created_at 2026_06_19; sid:1000102; rev:1;)
+
+# Detect the investigated domain in the visible server name of a TLS connection.
+alert tls $HOME_NET any -> $EXTERNAL_NET any (msg:"MALWARE Remcos RAT threat intelligence domain in TLS SNI"; flow:established,to_server; tls.sni; content:"eastvillageeatery.de"; nocase; endswith; classtype:trojan-activity; reference:url,www.virustotal.com/gui/domain/eastvillageeatery.de; reference:url,attack.mitre.org/techniques/T1071/001/; metadata: malware_family Remcos_RAT, confidence High, mitre_tactic_id TA0011, mitre_technique_id T1071.001, created_at 2026_06_19; sid:1000103; rev:1;)
+
+# Detect outbound traffic to either IP address associated with the domain during analysis.
+alert ip $HOME_NET any -> [104.21.53.137,172.67.213.98] any (msg:"MALWARE Remcos RAT threat intelligence IP connection"; classtype:trojan-activity; reference:url,www.virustotal.com/gui/domain/eastvillageeatery.de; reference:url,attack.mitre.org/techniques/T1071/; metadata: malware_family Remcos_RAT, confidence Medium, mitre_tactic_id TA0011, mitre_technique_id T1071, created_at 2026_06_19; sid:1000104; rev:1;)

@@ -1,8 +1,9 @@
-Type,Indicator,Description,Source
-Hash,,Remcos sample hash,
-Domain,,Possible C2 domain,
-IP,,Possible C2 IP,
-Registry,,Persistence registry key,
-File,,Dropped file,
-Process,,Suspicious process,
-Mutex,,Possible malware mutex,
+Type,Indicator,Description,Source,Confidence
+SHA256,a6ccd89558c4b5cd2fec2512b846e14620be2cb3489f85b99203a9e4b9751d6a,Remcos sample hash,MalwareBazaar/VirusTotal/Microsoft Sentinel,High
+MD5,4a40b6494d80287a5660b2b0fe881ddf,Remcos sample MD5 hash,VirusTotal,High
+SHA1,67f28f3897dcf58f8a281ac2ee2e14cfffe1d36c,Remcos sample SHA1 hash,VirusTotal,High
+Domain,eastvillageeatery.de,Possible Remcos command-and-control domain,VirusTotal/Microsoft Sentinel,High
+IP,104.21.53.137,Associated Remcos infrastructure,VirusTotal/Microsoft Sentinel,Medium
+IP,172.67.213.98,Associated Remcos infrastructure,VirusTotal/Microsoft Sentinel,Medium
+File,eastvillageeatery.exe,Observed Remcos-related filename,VirusTotal/Microsoft Defender,High
+File,7hr8ftfxm.exe,Observed Remcos-related filename,VirusTotal,Medium
