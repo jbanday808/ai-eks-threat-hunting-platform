@@ -25,11 +25,33 @@ This project documents a completed defensive investigation of Remcos RAT using t
 | Kali Linux | Provide an isolated analysis environment and security tools |
 | MITRE ATT&CK | Map evidence to known adversary behavior |
 
-## Investigation Workflow
+# Investigation Workflow
 
-```text
-Threat Intelligence → Static Analysis → IOC Collection → YARA Detection → MITRE ATT&CK Mapping → Incident Response
-```
+![Threat Intelligence and Detection Engineering Workflow](../../img/remcos/remcos-workflow-diagram.png)
+
+> This workflow demonstrates how threat intelligence is transformed into practical detections, investigations, and incident response activities.
+
+| Phase | Purpose |
+| --- | --- |
+| Threat Intelligence | Collect information about known threats and malicious infrastructure. |
+| IOC Development | Create indicators such as hashes, domains, IPs, and filenames. |
+| Threat Hunting | Search logs and systems for evidence of malicious activity. |
+| Detection Engineering | Develop YARA, Sigma, Suricata, Sentinel, and Splunk detections. |
+| Endpoint Detection | Validate findings through Microsoft Defender and endpoint telemetry. |
+| Behavior Analysis | Analyze malware execution and persistence mechanisms. |
+
+# Investigation Methodology
+
+The investigation followed a structured workflow:
+
+1. Threat Intelligence Collection
+2. IOC Development
+3. Threat Hunting
+4. Detection Engineering
+5. Endpoint Detection
+6. Behavioral Analysis
+
+This approach helped transform raw threat intelligence into actionable detections and investigation findings.
 
 ## Key Findings
 
