@@ -1,4 +1,4 @@
-# Architecture
+c# Architecture
 
 The AI-Powered EKS Threat Hunting & Cloud Incident Response Platform is a DevSecOps and runtime security project for Amazon EKS. It validates infrastructure, Python code, container images, software supply chain artifacts, runtime detections, AWS-native findings, AI-assisted triage, and incident response reporting.
 

@@ -6,6 +6,10 @@ Dynamic analysis was completed in an isolated Windows 11 Enterprise lab environm
 
 Dynamic analysis helps defenders understand what malware does after execution. This behavior-based evidence improves visibility, strengthens detection logic, and gives response teams practical information for identifying affected systems, validating containment, and finding related activity.
 
+## Executive Summary
+
+A Remcos RAT sample was analyzed within an isolated Windows 11 lab environment. Behavioral monitoring, endpoint telemetry, threat intelligence, and centralized logging confirmed malicious activity, identified persistence mechanisms, validated indicators of compromise, and produced threat hunting content that can be reused for future investigations.
+
 ## Analysis Goal
 
 The analysis was conducted to identify and document:
@@ -35,19 +39,9 @@ Understanding malware behavior allows defenders to create more effective detecti
 
 ## Evidence Sources
 
-- VMware snapshot
-- Procmon monitoring
-- Noriben timeline
-- Microsoft Defender detections
-- Splunk threat hunting results
-- Splunk Threat Hunting Dashboard
-- Microsoft Sentinel threat intelligence indicators
-- MalwareBazaar intelligence
-- VirusTotal intelligence
-- YARA analysis
-- Investigation screenshots
+Evidence was collected from endpoint telemetry, behavioral monitoring tools, threat intelligence platforms, and centralized logging systems, including Procmon, Noriben, Microsoft Defender, Splunk Enterprise, Microsoft Sentinel, MalwareBazaar, VirusTotal, and YARA.
 
-These sources provided complementary evidence: behavioral tools recorded endpoint activity, security platforms supplied detections and telemetry, and threat intelligence services added context used to validate and enrich the findings.
+These sources provided complementary evidence: behavioral tools showed what happened on the system, security platforms confirmed detections, and threat intelligence added context for validation and hunting.
 
 ## Observed Behavior
 
@@ -73,7 +67,7 @@ The evidence established that the suspicious executable generated observable end
 - Microsoft Defender generated malware detections.
 - Splunk searches confirmed related security events.
 
-**Why it matters:** Process monitoring confirmed that the sample produced observable activity and supplied timestamps and event context for validation. This evidence helped analysts connect execution behavior with Defender detections and centralized Splunk records.
+**Investigation Value:** Process monitoring confirmed that the sample produced observable activity and supplied timestamps and event context for validation. This evidence helped analysts connect execution behavior with Defender detections and centralized Splunk records.
 
 ### File Activity
 
@@ -84,7 +78,7 @@ The evidence established that the suspicious executable generated observable end
 - File-based indicators supported IOC development and threat hunting activities.
 - SHA256 indicators were validated through multiple intelligence sources.
 
-**Why it matters:** Malicious files often become primary indicators during threat hunting and incident response. The filename and hash gave analysts precise artifacts to search across endpoint telemetry, security platforms, and threat intelligence sources.
+**Investigation Value:** Malicious files often become primary indicators during threat hunting and incident response. The filename and hash gave analysts precise artifacts to search across endpoint telemetry, security platforms, and threat intelligence sources.
 
 ### Persistence Activity
 
@@ -94,7 +88,7 @@ The evidence established that the suspicious executable generated observable end
 - Persistence artifacts were associated with `eastvillageeatery.exe`.
 - Findings aligned with known Remcos RAT behavior.
 
-**Why it matters:** Run Key persistence can automatically restart malware when a user signs in, increasing the risk of continued compromise. Identifying this behavior supports containment validation, registry-focused hunting, and detection engineering for similar persistence attempts.
+**Investigation Value:** Run Key persistence can automatically restart malware when a user signs in, increasing the risk of continued compromise. Identifying this behavior supports containment validation, registry-focused hunting, and detection engineering for similar persistence attempts.
 
 ### Threat Intelligence Indicators
 
@@ -120,7 +114,7 @@ The evidence established that the suspicious executable generated observable end
 - Threat intelligence enrichment linked the infrastructure to Remcos activity.
 - Indicators were used to support hunting and correlation activities.
 
-**Why it matters:** Threat intelligence indicators act like fingerprints that help analysts identify related malicious activity across multiple systems and data sources. Correlating the indicators with endpoint, DNS, proxy, and firewall records supports broader scoping, while domain, process, file, and time context helps analysts avoid treating a shared IP address as conclusive evidence by itself.
+**Investigation Value:** Threat intelligence indicators act like fingerprints that help analysts identify related malicious activity across multiple systems and data sources. Correlating the indicators with endpoint, DNS, proxy, and firewall records supports broader scoping, while domain, process, file, and time context helps analysts avoid treating a shared IP address as conclusive evidence by itself.
 
 ### Security Detections
 
@@ -243,17 +237,15 @@ The completed analysis confirmed the malware family, affected artifacts, persist
 
 ## Analyst Summary
 
-Dynamic analysis provided visibility into how the Remcos sample behaved after execution within a controlled lab environment. Evidence collected from Procmon, Noriben, Microsoft Defender, Splunk Enterprise, Microsoft Sentinel, VirusTotal, MalwareBazaar, and YARA collectively validated the malware as Remcos RAT.
+Dynamic analysis confirmed Remcos RAT activity through behavioral monitoring, endpoint telemetry, threat intelligence, and centralized log analysis. Evidence collected from Procmon, Noriben, Microsoft Defender, Splunk Enterprise, Microsoft Sentinel, MalwareBazaar, VirusTotal, and YARA validated the malware classification and supported the development of reusable threat hunting and detection content.
 
-The investigation produced actionable indicators of compromise, threat hunting content, intelligence enrichment, and detection opportunities that can be reused for future investigations. By combining endpoint telemetry with threat intelligence and centralized logging, analysts gained greater visibility into suspicious activity and improved their ability to identify related threats.
-
-The completed workflow demonstrated how behavioral evidence, endpoint detections, centralized searches, and external intelligence can be correlated without relying on a single source. This approach supports faster scoping, clearer incident documentation, and more defensible containment and remediation decisions.
+The investigation demonstrated how multiple defensive security tools can be correlated to improve visibility, accelerate investigations, and support incident response activities.
 
 ## Conclusion
 
-The dynamic analysis successfully documented observable Remcos RAT behavior within a controlled and isolated environment. Combining behavioral monitoring, endpoint telemetry, threat intelligence enrichment, and Splunk-based hunting provided a repeatable workflow for malware investigation and incident response.
+Dynamic analysis documented observable Remcos RAT behavior using behavioral monitoring, endpoint telemetry, threat intelligence, and Splunk-based hunting. The resulting workflow supports repeatable malware investigation and incident response.
 
-The investigation demonstrates practical experience with malware analysis, detection engineering, IOC enrichment, Microsoft Defender analysis, Microsoft Sentinel threat intelligence, and threat hunting methodologies. Centralized dashboards, telemetry collection, and threat intelligence integration improve visibility, reduce investigation time, and strengthen overall security operations.
+The project demonstrates malware analysis, detection engineering, IOC enrichment, Microsoft Defender analysis, Microsoft Sentinel threat intelligence, and threat hunting. Centralized dashboards and telemetry improve visibility, reduce investigation time, and strengthen security operations.
 
 ## References
 
