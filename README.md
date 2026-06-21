@@ -8,9 +8,13 @@ The platform was built to demonstrate practical cloud security, Kubernetes secur
 
 ## Architecture Diagrams
 
+### Figure 1
+
 ![Figure 1. High-Level Architecture](img/aiagent/ai-eks-threat-hunting-platform-diagram-v2.png)
 
 Figure 1. High-level view of the platform showing CI/CD, security validation, runtime detection, AI triage, and incident response.
+
+### Figure 2
 
 ![Figure 2. Detailed DevSecOps Architecture](img/aiagent/ai-eks-threat-hunting-platform-detailed-diagram.png)
 
@@ -53,6 +57,21 @@ This project demonstrates:
 - AI-Assisted Security Operations
 
 The platform validates secure software delivery, runtime threat detection, automated triage, and cloud incident response workflows within Amazon EKS.
+
+### Security Frameworks and Methodologies
+
+This project demonstrates practical application of:
+
+- MITRE ATT&CK Framework
+- Threat Hunting Methodologies
+- Detection Engineering
+- Incident Response
+- DevSecOps Security Controls
+- Software Supply Chain Security
+- Runtime Threat Detection
+- Cloud Security Best Practices
+
+These frameworks and methodologies supported detection, investigation, triage, and response activities throughout the project.
 
 ## Technology Stack
 
@@ -128,6 +147,8 @@ This output demonstrates automated conversion of security alerts into structured
 
 ## Case Studies
 
+These completed investigations demonstrate practical malware analysis, threat hunting, detection engineering, and incident response workflows.
+
 ### Remcos RAT Investigation
 
 Completed malware analysis and threat hunting case study covering:
@@ -183,7 +204,7 @@ See supporting documentation for complete references:
 
 James Banday
 
-Cloud Security | Kubernetes | DevSecOps | Threat Detection | Incident Response
+Threat Hunter | Cyber Intrusion Analyst | Cloud Security | Kubernetes | DevSecOps | Incident Response
 
 GitHub:
 https://github.com/jbanday808/ai-eks-threat-hunting-platform/tree/main
@@ -191,4 +212,6 @@ https://github.com/jbanday808/ai-eks-threat-hunting-platform/tree/main
 LinkedIn:
 https://www.linkedin.com/in/james-allen-morta-banday-62a391128/
 
-This project demonstrates practical cloud security, Kubernetes security, DevSecOps automation, threat detection, threat hunting, incident response, and AI-assisted security operations within Amazon EKS.
+This project demonstrates practical cloud security, Kubernetes security, DevSecOps automation, threat detection, threat hunting, malware analysis, incident response, and AI-assisted security operations within Amazon EKS.
+
+The portfolio showcases hands-on experience with cloud-native security, detection engineering, malware investigations, threat intelligence, Splunk-based threat hunting, runtime monitoring, and incident response workflows used by modern security operations teams.
