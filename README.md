@@ -73,6 +73,39 @@ This project demonstrates practical application of:
 
 These frameworks and methodologies supported detection, investigation, triage, and response activities throughout the project.
 
+## Case Studies
+
+These case studies demonstrate hands-on malware analysis, threat hunting, detection engineering, IOC enrichment, MITRE ATT&CK mapping, Splunk investigations, and incident response documentation.
+
+### Remcos RAT Investigation
+
+Completed malware analysis and threat hunting investigation covering:
+
+- Static Analysis
+- Dynamic Analysis
+- IOC Enrichment
+- Threat Intelligence
+- MITRE ATT&CK Mapping
+- Splunk Threat Hunting Dashboard
+- Detection Engineering
+- Incident Response Documentation
+
+[View the Remcos RAT Case Study](case-studies/remcos/)
+
+### Agent Tesla Investigation
+
+Completed malware analysis and detection engineering investigation covering:
+
+- Network Traffic Analysis
+- Zeek Analysis
+- Suricata Detection
+- YARA Detection
+- Threat Intelligence
+- IOC Development
+- Splunk Detection Engineering
+
+[View the Agent Tesla Case Study](case-studies/agenttesla/)
+
 ## Technology Stack
 
 | Technology | Purpose |
@@ -144,39 +177,6 @@ This output demonstrates automated conversion of security alerts into structured
 | [Container Security](docs/container-security.md) | Docker, EKS deployment, Falco, and GuardDuty. |
 | [AWS GuardDuty Security Agent](docs/aws-security-agent.md) | GuardDuty agent purpose, validation, and response value. |
 | [Cloud Incident Response](docs/cloud-incident-response.md) | Detection, triage, investigation, recommendations, and reports. |
-
-## Case Studies
-
-These completed investigations demonstrate practical malware analysis, threat hunting, detection engineering, and incident response workflows.
-
-### Remcos RAT Investigation
-
-Completed malware analysis and threat hunting case study covering:
-
-- Static Analysis
-- Dynamic Analysis
-- IOC Enrichment
-- Threat Intelligence
-- MITRE ATT&CK Mapping
-- Splunk Threat Hunting Dashboard
-- Detection Engineering
-- Incident Response Documentation
-
-[View the Remcos RAT case study](case-studies/remcos/)
-
-### Agent Tesla Investigation
-
-Completed malware analysis and detection engineering case study covering:
-
-- Network Traffic Analysis
-- Zeek Analysis
-- Suricata Detection
-- YARA Detection
-- Threat Intelligence
-- IOC Development
-- Splunk Detection Engineering
-
-[View the Agent Tesla case study](case-studies/agenttesla/)
 
 ## Repository Structure
 
