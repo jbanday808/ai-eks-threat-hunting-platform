@@ -1,10 +1,8 @@
+__pycache__/
+*.pyc
+
 .terraform/
 *.tfstate
 *.tfstate.*
-*.tfvars
-*.pem
-*.key
-.env
-__pycache__/
-*.pyc
-ai-triage/reports/incident-*.md
+
+.vscode/
