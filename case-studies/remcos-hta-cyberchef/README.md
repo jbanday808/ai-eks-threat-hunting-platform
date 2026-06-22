@@ -134,6 +134,61 @@ Microsoft Defender detected the malicious PowerShell activity and automatically 
 
 The investigation revealed a heavily obfuscated HTA-based RemcosRAT loader that attempted to download and load malicious code into memory. Microsoft Defender successfully detected and remediated the threat, and post-analysis validation confirmed no active infection or persistence remained on the virtual machine.
 
-## Safety Statement
+## Safety Notice
 
-This repository contains documentation, defensive indicators, and screenshots only. It does not include malware samples, live payloads, executables, DLLs, HTA files, or instructions for executing malware.
+- Defensive cybersecurity research only.
+- No malware samples included.
+- No credentials included.
+- No sensitive data included.
+- No malware execution instructions included.
+
+---
+
+## Author
+
+**James Banday**
+
+Threat Hunter | Cyber Intrusion Analyst | Cloud Security | Kubernetes | DevSecOps | Incident Response
+
+This case study demonstrates practical malware analysis, threat hunting, IOC enrichment, Microsoft Defender investigation, Microsoft Sentinel threat intelligence, Splunk dashboard development, detection engineering, and incident response documentation used to investigate and document RemcosRAT activity in a controlled laboratory environment.
+
+---
+
+## GitHub Repository
+
+https://github.com/jbanday808/ai-powered-threat-detection-platform
+
+---
+
+## LinkedIn Profile
+
+https://www.linkedin.com/in/james-allen-morta-banday-62a391128/
+
+---
+
+## Skills Demonstrated
+
+- Malware Analysis
+- Static Analysis
+- Dynamic Analysis
+- Cyber Threat Intelligence
+- Incident Response
+- Threat Hunting
+- IOC Development
+- MITRE ATT&CK Mapping
+- Microsoft Defender Investigation
+- Microsoft Sentinel Threat Intelligence
+- Splunk Detection Engineering
+- Network Traffic Analysis
+- PowerShell Analysis
+- CyberChef Analysis
+- Noriben Analysis
+- Security Reporting
+
+---
+
+## Project Outcome
+
+The investigation successfully identified and documented an obfuscated RemcosRAT HTA loader that used multiple layers of concealment, PowerShell execution, network communication, and in-memory code loading techniques. Microsoft Defender detected and remediated the malicious activity, and post-analysis validation confirmed no active RemcosRAT processes, no Caspol processes, and no persistence mechanisms remained on the virtual machine.
+
+**Final Status:** Closed
