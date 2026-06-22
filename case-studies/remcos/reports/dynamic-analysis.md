@@ -8,7 +8,7 @@ Dynamic analysis helps defenders understand what malware does after execution. T
 
 ## Executive Summary
 
-A Remcos RAT sample and a separate HTA-based loading chain were analyzed within an isolated Windows 11 lab environment. Monitoring confirmed malicious activity and recorded the HTA chain's PowerShell connection to `66.63.170.34:80`. Microsoft Defender remediated the HTA threat; follow-up checks found no active Remcos or Caspol process and no persistence from that chain.
+A Remcos RAT sample was analyzed within an isolated Windows 11 lab environment. Behavioral monitoring, endpoint telemetry, threat intelligence, and centralized logging confirmed malicious activity, identified persistence mechanisms, validated indicators of compromise, and produced threat hunting content that can be reused for future investigations.
 
 ## Analysis Goal
 
@@ -152,20 +152,6 @@ Identify suspicious packed executables and characteristics commonly associated w
 Leverage hashes, domains, IP addresses, filenames, and intelligence indicators to support threat hunting. Enrichment adds context to raw events and helps analysts prioritize matches that have supporting behavioral evidence.
 
 Using multiple detection methods improves visibility, strengthens validation, and increases confidence during investigations. It also reduces dependence on any single tool or indicator and creates overlapping opportunities to detect related activity.
-
-## RemcosRAT HTA and CyberChef Analysis
-
-The HTA follow-up produced a separate, clearly scoped set of behavioral findings. `shell.hta` used a concealed PowerShell loader, and Noriben recorded PowerShell connecting to `66.63.170.34` over HTTP port `80`. The related chain referenced `optimized_MSI.png` and in-memory .NET loading through `AppDomain.CurrentDomain.Load`, followed by `Fiber.Program.Main`.
-
-Microsoft Defender detected and remediated the malicious content. Post-remediation verification found no active Remcos process and no active Caspol process. The same verification found no persistence created by this HTA chain. These results mean the attempted activity was visible and contained, with no verified continuing foothold in the lab system.
-
-![Noriben configuration verified](../../../img/remcos/cyberchef-analysis/RemcosRAT_05_Noriben_Configuration_Verified.png)
-
-![Noriben network connection](../../../img/remcos/cyberchef-analysis/RemcosRAT_06_Network_Connection_To_66.63.170.34.png)
-
-![Microsoft Defender remediation](../../../img/remcos/cyberchef-analysis/RemcosRAT_07_Microsoft_Defender_Remediation.png)
-
-Simple explanation: Monitoring saw PowerShell contact a suspicious internet address. Defender removed the threat, and follow-up checks found no Remcos or Caspol process and no way for this HTA chain to restart automatically.
 
 ## Investigation Evidence
 

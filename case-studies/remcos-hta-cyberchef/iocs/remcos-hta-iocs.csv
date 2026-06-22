@@ -1,0 +1,9 @@
+Type,Indicator,Description,Source,Confidence
+SHA256,d113f72b9248e3a89d72d1238a8465af7857822b82951681cff22391ffff3039,Hash associated with the HTA investigation,MalwareBazaar,High
+File,shell.hta,Working filename used during defensive analysis,Static analysis,High
+File,seriouslyworkingontheprojectforbestresults.hta,MalwareBazaar reference filename,MalwareBazaar,High
+File,optimized_MSI.png,Remote content name referenced by the loader,Static analysis,Medium
+IP,66.63.170.34,PowerShell HTTP destination observed on port 80,Noriben/VirusTotal,High
+IP,173.231.188.244,Infrastructure associated with the HTA investigation,VirusTotal,Medium
+Domain,as.al,Domain referenced during the HTA investigation,Static analysis/VirusTotal,Medium
+Domain,geoplugin.net,Network service referenced during the HTA investigation,Static analysis,Medium

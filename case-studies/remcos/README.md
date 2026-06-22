@@ -4,6 +4,8 @@
 
 This case study documents a completed defensive investigation of Remcos RAT using threat intelligence, static and dynamic analysis, detection engineering, MITRE ATT&CK mapping, Microsoft Defender, Microsoft Sentinel, Splunk, YARA, and external intelligence sources. It summarizes what was found, why it matters, and where to review the supporting technical evidence.
 
+Related case study: [RemcosRAT HTA and CyberChef Analysis](../remcos-hta-cyberchef/README.md)
+
 ## Executive Summary
 
 A Remcos RAT sample was investigated using threat intelligence, static analysis, dynamic analysis, detection engineering, Microsoft Defender, Microsoft Sentinel, YARA, Splunk, VirusTotal, and MalwareBazaar. Multiple evidence sources confirmed the malware family, identified associated infrastructure, validated indicators of compromise, and produced reusable threat hunting and detection content.
@@ -36,7 +38,6 @@ This investigation demonstrates practical malware analysis, IOC enrichment, dete
 | Strings | Extract readable static content for analysis. |
 | MITRE ATT&CK | Map evidence to known adversary behavior. |
 | VMware Workstation | Maintain an isolated and recoverable lab environment. |
-| CyberChef | Safely decode and explain concealed text for defensive analysis. |
 
 ## Investigation Workflow
 
@@ -68,104 +69,8 @@ The workflow shows how raw threat intelligence was turned into validated finding
 | Splunk detections | Remcos-related events identified |
 | Persistence activity | Windows Run Key behavior observed |
 | Detection sources | Defender, Sentinel, Splunk, MalwareBazaar, VirusTotal, YARA |
-| HTA network finding | Noriben observed PowerShell connecting to `66.63.170.34:80` |
-| HTA outcome | Defender remediated the threat; no active Remcos/Caspol process or persistence was found afterward |
 
 The investigation confirmed Remcos RAT activity using multiple independent sources. The findings supported threat hunting, detection engineering, incident response documentation, and dashboard development.
-
-## RemcosRAT HTA and CyberChef Analysis
-
-This follow-up examined `shell.hta`, a phishing-related file that hid a PowerShell loader with `boroc` obfuscation and Base64 encoding. The analysis showed that the loader referenced `optimized_MSI.png`, extracted text between `IN-` and `-in1`, replaced `#` with `A`, reversed the string, and decoded it from Base64. It then referenced `AppDomain.CurrentDomain.Load` and `Fiber.Program.Main`, which are consistent with loading .NET content directly into memory.
-
-Noriben recorded PowerShell connecting to `66.63.170.34:80`. Microsoft Defender detected and remediated the threat. Verification afterward found no active Remcos or Caspol process and no persistence from this HTA chain.
-
-| Business question | Finding |
-| --- | --- |
-| What happened? | A disguised HTA used hidden PowerShell and decoding steps in an attempted Remcos-related loading chain. |
-| Why does it matter? | The chain tried to hide its behavior and load code in memory, which can make basic file-only monitoring less effective. |
-| What was detected? | The hidden loader, its network connection, decoding behavior, and memory-loading references. |
-| What was blocked? | Microsoft Defender detected and remediated the malicious content. |
-| Final outcome | No active Remcos or Caspol process was found, and no persistence was observed. |
-
-### Supporting Evidence
-
-### Figure 1: MalwareBazaar Sample Details
-
-![MalwareBazaar sample details](../../img/remcos/cyberchef-analysis/RemcosRAT_01_MalwareBazaar_Sample_Details.png)
-
-**Explanation:**
-
-MalwareBazaar identified the investigated file as RemcosRAT and provided threat intelligence information such as file hashes and vendor detections. This helped validate that the sample belonged to a known remote access trojan family before deeper analysis began.
-
----
-
-### Figure 2: Boroc Obfuscation Removed
-
-![Boroc obfuscation removed](../../img/remcos/cyberchef-analysis/RemcosRAT_02_Boroc_Obfuscation_Removed.png)
-
-**Explanation:**
-
-The HTA file contained intentionally scrambled text designed to hide its true purpose. By removing repeated "boroc" text, the hidden content became easier to read and analyze. This is a common technique used by malware authors to avoid detection.
-
----
-
-### Figure 3: CyberChef Base64 Decode
-
-![CyberChef Base64 decode](../../img/remcos/cyberchef-analysis/RemcosRAT_03_CyberChef_Base64_Decode.png)
-
-**Explanation:**
-
-CyberChef was used to safely decode concealed text without executing the malware. The decoded content revealed a PowerShell loader that downloaded data, performed multiple decoding steps, and attempted to load program code directly into memory.
-
----
-
-### Figure 4: VirusTotal IP Reputation Analysis
-
-![VirusTotal IP reputation analysis](../../img/remcos/cyberchef-analysis/RemcosRAT_04_VirusTotal_IP_Reputation_Analysis.png)
-
-**Explanation:**
-
-VirusTotal showed that several security vendors had already flagged the IP address as suspicious or malicious. This provided additional confidence that the infrastructure contacted by the malware was associated with malicious activity.
-
----
-
-### Figure 5: Noriben Configuration Verification
-
-![Noriben configuration verified](../../img/remcos/cyberchef-analysis/RemcosRAT_05_Noriben_Configuration_Verified.png)
-
-**Explanation:**
-
-Noriben was configured to collect process, file, registry, and network activity during controlled malware analysis. Verifying the configuration ensured that system behavior would be properly recorded for investigation.
-
----
-
-### Figure 6: Network Connection to 66.63.170.34
-
-![Noriben network connection](../../img/remcos/cyberchef-analysis/RemcosRAT_06_Network_Connection_To_66.63.170.34.png)
-
-**Explanation:**
-
-Noriben recorded PowerShell establishing a network connection to IP address 66.63.170.34 over port 80. This finding confirmed that the loader attempted to communicate with an external system during execution.
-
----
-
-### Figure 7: Microsoft Defender Remediation
-
-![Microsoft Defender remediation](../../img/remcos/cyberchef-analysis/RemcosRAT_07_Microsoft_Defender_Remediation.png)
-
-**Explanation:**
-
-Microsoft Defender detected the malicious PowerShell activity and automatically removed the threat. Follow-up verification found no active RemcosRAT processes, no Caspol processes, and no evidence of persistence remaining on the system.
-
----
-
-### Executive Summary
-
-**Simple Summary:**
-
-The investigation revealed a heavily obfuscated HTA-based RemcosRAT loader that attempted to download and load malicious code into memory. Microsoft Defender successfully detected and remediated the threat, and post-analysis validation confirmed no active infection or persistence remained on the virtual machine.
-
----
 
 ## Reports
 

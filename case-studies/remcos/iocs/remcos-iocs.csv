@@ -7,9 +7,3 @@ IP,104.21.53.137,Associated Remcos infrastructure,VirusTotal/Microsoft Sentinel,
 IP,172.67.213.98,Associated Remcos infrastructure,VirusTotal/Microsoft Sentinel,Medium
 File,eastvillageeatery.exe,Observed Remcos-related filename,VirusTotal/Microsoft Defender,High
 File,7hr8ftfxm.exe,Observed Remcos-related filename,VirusTotal,Medium
-IP,66.63.170.34,PowerShell HTTP destination observed by Noriben,Noriben/VirusTotal,High
-IP,173.231.188.244,Infrastructure associated with the HTA investigation,VirusTotal,Medium
-Domain,as.al,Domain associated with the HTA investigation,Static analysis/VirusTotal,Medium
-Domain,geoplugin.net,Network service referenced during the HTA investigation,Static analysis,Medium
-File,shell.hta,Analyzed malicious HTML Application filename,MalwareBazaar/Static analysis,High
-SHA256,d113f72b9248e3a89d72d1238a8465af7857822b82951681cff22391ffff3039,Hash associated with the HTA investigation,MalwareBazaar,High

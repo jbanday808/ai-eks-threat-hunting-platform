@@ -90,7 +90,6 @@ Groups detections by severity so analysts can prioritize the highest-risk activi
 | Severity | `Severe` | Places the detections in the highest-priority category shown in the dashboard. |
 | Suspicious File | `eastvillageeatery.exe` | Provides a specific artifact for endpoint hunting and response. |
 | IOC Lookup | `eastvillageeatery.de`; `104.21.53.137`; `172.67.213.98`; `a6ccd89558c4b5cd2fec2512b846e14620be2cb3489f85b99203a9e4b9751d6a` | Supplies domain, IP, and SHA256 fingerprints for correlation across security data. |
-| Threat Intelligence Reference | SHA256 `d113f72b9248e3a89d72d1238a8465af7857822b82951681cff22391ffff3039`; file `seriouslyworkingontheprojectforbestresults.hta`; 13 vendor detections | Provides independent MalwareBazaar context supporting the Remcos classification. |
 | Splunk Forwarder | `Running` | Confirms the endpoint log collection service was active when verified. |
 
 ## Investigation Workflow
