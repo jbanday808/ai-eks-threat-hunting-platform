@@ -89,21 +89,83 @@ Noriben recorded PowerShell connecting to `66.63.170.34:80`. Microsoft Defender 
 
 ### Supporting Evidence
 
+### Figure 1: MalwareBazaar Sample Details
+
 ![MalwareBazaar sample details](../../img/remcos/cyberchef-analysis/RemcosRAT_01_MalwareBazaar_Sample_Details.png)
+
+**Explanation:**
+
+MalwareBazaar identified the investigated file as RemcosRAT and provided threat intelligence information such as file hashes and vendor detections. This helped validate that the sample belonged to a known remote access trojan family before deeper analysis began.
+
+---
+
+### Figure 2: Boroc Obfuscation Removed
 
 ![Boroc obfuscation removed](../../img/remcos/cyberchef-analysis/RemcosRAT_02_Boroc_Obfuscation_Removed.png)
 
+**Explanation:**
+
+The HTA file contained intentionally scrambled text designed to hide its true purpose. By removing repeated "boroc" text, the hidden content became easier to read and analyze. This is a common technique used by malware authors to avoid detection.
+
+---
+
+### Figure 3: CyberChef Base64 Decode
+
 ![CyberChef Base64 decode](../../img/remcos/cyberchef-analysis/RemcosRAT_03_CyberChef_Base64_Decode.png)
+
+**Explanation:**
+
+CyberChef was used to safely decode concealed text without executing the malware. The decoded content revealed a PowerShell loader that downloaded data, performed multiple decoding steps, and attempted to load program code directly into memory.
+
+---
+
+### Figure 4: VirusTotal IP Reputation Analysis
 
 ![VirusTotal IP reputation analysis](../../img/remcos/cyberchef-analysis/RemcosRAT_04_VirusTotal_IP_Reputation_Analysis.png)
 
+**Explanation:**
+
+VirusTotal showed that several security vendors had already flagged the IP address as suspicious or malicious. This provided additional confidence that the infrastructure contacted by the malware was associated with malicious activity.
+
+---
+
+### Figure 5: Noriben Configuration Verification
+
 ![Noriben configuration verified](../../img/remcos/cyberchef-analysis/RemcosRAT_05_Noriben_Configuration_Verified.png)
+
+**Explanation:**
+
+Noriben was configured to collect process, file, registry, and network activity during controlled malware analysis. Verifying the configuration ensured that system behavior would be properly recorded for investigation.
+
+---
+
+### Figure 6: Network Connection to 66.63.170.34
 
 ![Noriben network connection](../../img/remcos/cyberchef-analysis/RemcosRAT_06_Network_Connection_To_66.63.170.34.png)
 
+**Explanation:**
+
+Noriben recorded PowerShell establishing a network connection to IP address 66.63.170.34 over port 80. This finding confirmed that the loader attempted to communicate with an external system during execution.
+
+---
+
+### Figure 7: Microsoft Defender Remediation
+
 ![Microsoft Defender remediation](../../img/remcos/cyberchef-analysis/RemcosRAT_07_Microsoft_Defender_Remediation.png)
 
-Simple explanation: The investigation uncovered a hidden chain designed to download and start a remote-access threat. Defender cleaned it up, and the final checks found no continuing infection or automatic restart mechanism.
+**Explanation:**
+
+Microsoft Defender detected the malicious PowerShell activity and automatically removed the threat. Follow-up verification found no active RemcosRAT processes, no Caspol processes, and no evidence of persistence remaining on the system.
+
+---
+
+### Executive Summary
+
+**Simple Summary:**
+
+The investigation revealed a heavily obfuscated HTA-based RemcosRAT loader that attempted to download and load malicious code into memory. Microsoft Defender successfully detected and remediated the threat, and post-analysis validation confirmed no active infection or persistence remained on the virtual machine.
+
+---
 
 ## Reports
 
