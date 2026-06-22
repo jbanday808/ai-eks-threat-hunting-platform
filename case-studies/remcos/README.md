@@ -36,6 +36,7 @@ This investigation demonstrates practical malware analysis, IOC enrichment, dete
 | Strings | Extract readable static content for analysis. |
 | MITRE ATT&CK | Map evidence to known adversary behavior. |
 | VMware Workstation | Maintain an isolated and recoverable lab environment. |
+| CyberChef | Safely decode and explain concealed text for defensive analysis. |
 
 ## Investigation Workflow
 
@@ -67,8 +68,42 @@ The workflow shows how raw threat intelligence was turned into validated finding
 | Splunk detections | Remcos-related events identified |
 | Persistence activity | Windows Run Key behavior observed |
 | Detection sources | Defender, Sentinel, Splunk, MalwareBazaar, VirusTotal, YARA |
+| HTA network finding | Noriben observed PowerShell connecting to `66.63.170.34:80` |
+| HTA outcome | Defender remediated the threat; no active Remcos/Caspol process or persistence was found afterward |
 
 The investigation confirmed Remcos RAT activity using multiple independent sources. The findings supported threat hunting, detection engineering, incident response documentation, and dashboard development.
+
+## RemcosRAT HTA and CyberChef Analysis
+
+This follow-up examined `shell.hta`, a phishing-related file that hid a PowerShell loader with `boroc` obfuscation and Base64 encoding. The analysis showed that the loader referenced `optimized_MSI.png`, extracted text between `IN-` and `-in1`, replaced `#` with `A`, reversed the string, and decoded it from Base64. It then referenced `AppDomain.CurrentDomain.Load` and `Fiber.Program.Main`, which are consistent with loading .NET content directly into memory.
+
+Noriben recorded PowerShell connecting to `66.63.170.34:80`. Microsoft Defender detected and remediated the threat. Verification afterward found no active Remcos or Caspol process and no persistence from this HTA chain.
+
+| Business question | Finding |
+| --- | --- |
+| What happened? | A disguised HTA used hidden PowerShell and decoding steps in an attempted Remcos-related loading chain. |
+| Why does it matter? | The chain tried to hide its behavior and load code in memory, which can make basic file-only monitoring less effective. |
+| What was detected? | The hidden loader, its network connection, decoding behavior, and memory-loading references. |
+| What was blocked? | Microsoft Defender detected and remediated the malicious content. |
+| Final outcome | No active Remcos or Caspol process was found, and no persistence was observed. |
+
+### Supporting Evidence
+
+![MalwareBazaar sample details](../../img/remcos/cyberchef-analysis/RemcosRAT_01_MalwareBazaar_Sample_Details.png)
+
+![Boroc obfuscation removed](../../img/remcos/cyberchef-analysis/RemcosRAT_02_Boroc_Obfuscation_Removed.png)
+
+![CyberChef Base64 decode](../../img/remcos/cyberchef-analysis/RemcosRAT_03_CyberChef_Base64_Decode.png)
+
+![VirusTotal IP reputation analysis](../../img/remcos/cyberchef-analysis/RemcosRAT_04_VirusTotal_IP_Reputation_Analysis.png)
+
+![Noriben configuration verified](../../img/remcos/cyberchef-analysis/RemcosRAT_05_Noriben_Configuration_Verified.png)
+
+![Noriben network connection](../../img/remcos/cyberchef-analysis/RemcosRAT_06_Network_Connection_To_66.63.170.34.png)
+
+![Microsoft Defender remediation](../../img/remcos/cyberchef-analysis/RemcosRAT_07_Microsoft_Defender_Remediation.png)
+
+Simple explanation: The investigation uncovered a hidden chain designed to download and start a remote-access threat. Defender cleaned it up, and the final checks found no continuing infection or automatic restart mechanism.
 
 ## Reports
 

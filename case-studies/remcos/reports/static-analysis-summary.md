@@ -2,7 +2,7 @@
 
 ## Overview
 
-Static analysis confirmed that the Remcos sample is a UPX-packed PE32 Windows executable. The file targets 32-bit Windows systems, and its packed structure is intended to make inspection more difficult. This report documents defensive findings without running the sample.
+Static analysis confirmed that the original Remcos sample is a UPX-packed PE32 Windows executable. A follow-up review of `shell.hta` also exposed an obfuscated, Base64-encoded PowerShell and .NET loading chain. This report documents defensive findings without providing execution instructions.
 
 ## File Information
 
@@ -56,6 +56,25 @@ These indicators should be reviewed in context because shared infrastructure and
 | Tags | `peexe`, `persistence`, `spreader`, `long-sleeps`, `upx` |
 
 The high detection ratio and negative community score support the assessment that the sample is malicious.
+
+## RemcosRAT HTA and CyberChef Analysis
+
+Static review of `shell.hta` found a `boroc`-obfuscated PowerShell loader. CyberChef was used only to make the concealed text readable; the content was not executed as part of this decoding review.
+
+The loader referenced `optimized_MSI.png` and contained the following transformation chain:
+
+1. Select text between `IN-` and `-in1`.
+2. Replace each `#` with `A`.
+3. Reverse the string.
+4. Decode the result from Base64.
+
+The readable code then referenced `AppDomain.CurrentDomain.Load` and `Fiber.Program.Main`. In plain English, these names indicate an attempt to place .NET program content directly into memory and start it without a normal installed application. This is important because memory-based loading can leave fewer obvious files for an analyst to find.
+
+![Boroc obfuscation removed](../../../img/remcos/cyberchef-analysis/RemcosRAT_02_Boroc_Obfuscation_Removed.png)
+
+![CyberChef Base64 decode](../../../img/remcos/cyberchef-analysis/RemcosRAT_03_CyberChef_Base64_Decode.png)
+
+Simple explanation: The HTA hid its purpose by scrambling and encoding text. Defensive decoding exposed a PowerShell loader designed to place program code in memory.
 
 ## Evidence Screenshots
 

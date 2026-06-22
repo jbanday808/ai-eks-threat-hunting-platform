@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-The completed investigation identified a malicious 32-bit Windows executable associated with Remcos RAT. The sample was UPX packed, matched a custom YARA rule, and was detected by 58 of 67 security vendors. Threat intelligence connected the investigation to the domain `eastvillageeatery.de` and two related IP addresses. The validated indicators were added to Microsoft Sentinel and used for defensive threat hunting.
+The completed investigation identified a malicious 32-bit Windows executable associated with Remcos RAT and a separate HTA-based loading chain. The executable was UPX packed, matched a custom YARA rule, and was detected by 58 of 67 security vendors. The HTA follow-up exposed concealed PowerShell, Base64 decoding, an HTTP connection, and in-memory loading behavior. Microsoft Defender remediated that threat, and final checks found no active Remcos or Caspol process and no persistence from the HTA chain.
 
 ## Incident Overview
 
@@ -28,6 +28,7 @@ Remcos is designed to provide unauthorized remote access to a computer. The comb
 | Threat intelligence | The domain and two related IP addresses were identified. |
 | Vendor detection | 58 of 67 VirusTotal security vendors detected the file. |
 | Security monitoring | Indicators were created and hunted in Microsoft Sentinel. |
+| HTA follow-up | Concealed PowerShell and an HTTP connection to `66.63.170.34:80` were identified; Defender remediated the threat. |
 
 ## Indicators of Compromise
 
@@ -61,6 +62,27 @@ Documented capability does not prove that every behavior occurred on an affected
 | YARA | `Remcos_Combined_Static_IOC` matched. | Supports repeatable file-based detection. |
 | Microsoft Sentinel | File, domain, and IP indicators were created and hunted. | Supports centralized correlation and investigation. |
 | Static analysis | UPX packing and suspicious API indicators were found. | Helps identify similar files without running them. |
+
+## RemcosRAT HTA and CyberChef Analysis
+
+The follow-up analysis reviewed `shell.hta`, a phishing-related HTML Application that concealed a PowerShell loader with `boroc` obfuscation and Base64 encoding. The decoded script referenced `optimized_MSI.png`, selected content between the markers `IN-` and `-in1`, replaced `#` characters with `A`, reversed the string, and decoded it from Base64. The resulting .NET content was designed to load directly into memory through `AppDomain.CurrentDomain.Load` and call `Fiber.Program.Main`.
+
+This matters because the chain used several layers to hide its purpose and reduce obvious files on disk. Noriben recorded a PowerShell connection to `66.63.170.34:80`. VirusTotal reputation data added context for the network indicator, while Microsoft Defender detected and remediated the threat. Final checks found no active Remcos or Caspol process and no persistence from this HTA chain.
+
+| Outcome question | Answer |
+| --- | --- |
+| What happened? | A phishing-related HTA attempted to use an obscured PowerShell and in-memory .NET loading chain. |
+| What was detected? | The malicious HTA behavior, its decoding chain, and an HTTP connection to `66.63.170.34:80`. |
+| What was blocked? | Microsoft Defender detected and remediated the malicious content before lasting access was verified. |
+| Final outcome | No active Remcos or Caspol process was found, and no persistence was observed during verification. |
+
+![MalwareBazaar sample details](../../../img/remcos/cyberchef-analysis/RemcosRAT_01_MalwareBazaar_Sample_Details.png)
+
+![VirusTotal IP reputation analysis](../../../img/remcos/cyberchef-analysis/RemcosRAT_04_VirusTotal_IP_Reputation_Analysis.png)
+
+![Microsoft Defender remediation](../../../img/remcos/cyberchef-analysis/RemcosRAT_07_Microsoft_Defender_Remediation.png)
+
+Simple explanation: The file tried to hide a remote-access threat behind several decoding steps. Defender stopped and cleaned it, and the final checks did not find the malware still running or set to return.
 
 ## Response Actions
 
