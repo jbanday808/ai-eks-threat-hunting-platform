@@ -1,7 +1,7 @@
 # Screenshot Evidence
 
 ## Supplemental Infection Chain Diagram
-<<<<<<< HEAD
+
 
 ![Lumma Stealer infection chain](LummaStealer_Infection_Chain_Diagram.png)
 
@@ -114,7 +114,6 @@ This screenshot will show that the custom YARA rule successfully detected the Lu
 Status: Pending. The malware sample and YARA command-line tool are not present in this workspace, so a genuine validation screenshot could not be captured.
 
 
-=======
 
 ![Lumma Stealer infection chain](LummaStealer_Infection_Chain_Diagram.png)
 
@@ -291,4 +290,4 @@ The rule was developed using indicators identified through malware analysis and 
 ### Simple Summary
 
 This screenshot confirms that the custom YARA rule successfully detected the Lumma Stealer sample using indicators discovered during the investigation.
->>>>>>> 749ec46 (Update Lumma Stealer screenshot documentation and YARA validation)
+
