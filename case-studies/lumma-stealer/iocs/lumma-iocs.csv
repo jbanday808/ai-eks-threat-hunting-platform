@@ -1,0 +1,19 @@
+IOC_Type,Value,Description
+FileName,Invoice_2026.exe,Lumma Stealer malware sample analyzed in the lab
+SHA256,3368d54f30631c9e305f6df3464e08b6b4f24eebdb605240c44b144deed717fa,Unique fingerprint of the malware sample
+MD5,c83776891f0407e6401a7d7004691f86,Additional file fingerprint
+ThreatName,Trojan:Win32/SalatStealer.SMX!MTB,Microsoft Defender detection name
+ThreatName,Trojan:Win32/SalatStealer!pz,Microsoft Defender detection name
+ThreatName,Behavior:Win32/PFAppMultiStepRem.A,Microsoft Defender behavior-based detection
+IP,104.21.63.184,Network address observed during analysis
+Process,Invoice_2026.exe,Main malware process observed during testing
+Function,main.GetChromiumMasterKeys,Function related to browser password access
+Function,main.getChromeLogins,Function related to Chrome login collection
+Function,main.getEdgeLogins,Function related to Edge login collection
+Function,main.loginPBE.Decrypt,Function related to password decryption
+Function,main.findLsassProcess,Function related to process discovery
+Function,main.enablePrivilege,Function related to requesting higher privileges
+Function,main.getSystemToken,Function related to higher-level system access
+Function,main.impersonateSystem,Function related to acting with SYSTEM-level privileges
+Function,main.DPAPI,Function related to Windows protected credential access
+Function,main.NtQuerySystemHandles,Function related to system discovery
