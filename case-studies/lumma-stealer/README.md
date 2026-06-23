@@ -4,9 +4,11 @@
 
 This case study documents the investigation of a Lumma Stealer malware sample inside a controlled and isolated malware analysis lab.
 
-The goal of the investigation was to identify what the malware does, collect indicators of compromise, map the behavior to MITRE ATT&CK, and create detection content that security teams can use to find similar threats.
+The goal of the investigation was to identify what the malware does, collect indicators of compromise, perform reverse engineering, map the behavior to MITRE ATT&CK, and create detection content that security teams can use to find similar threats.
 
 The investigation confirmed behavior consistent with credential theft malware, including browser password targeting, password decryption functions, system discovery, process discovery, and privilege-related activity.
+
+Reverse engineering was performed using IDA Pro to review strings, functions, and malware capabilities without exposing active malware in the repository.
 
 No live malware, executables, archives, or payloads are included in this repository.
 
@@ -18,6 +20,7 @@ No live malware, executables, archives, or payloads are included in this reposit
 | Investigation Status       | Complete      |
 | Static Analysis            | Complete      |
 | Dynamic Analysis           | Complete      |
+| Reverse Engineering        | Complete      |
 | MITRE ATT&CK Mapping       | Complete      |
 | IOC Development            | Complete      |
 | YARA Detection             | Complete      |
@@ -61,29 +64,36 @@ No live malware, executables, archives, or payloads are included in this reposit
 | -------- | --------------------------- |
 | Phase 1  | Malware Intelligence Review |
 | Phase 2  | Static Analysis             |
-| Phase 3  | Dynamic Analysis            |
-| Phase 4  | Credential Theft Review     |
-| Phase 5  | MITRE ATT&CK Mapping        |
-| Phase 6  | IOC Development             |
-| Phase 7  | YARA Detection Development  |
-| Phase 8  | Splunk Threat Hunting       |
-| Phase 9  | Incident Documentation      |
-| Phase 10 | Final Assessment            |
+| Phase 3  | Reverse Engineering         |
+| Phase 4  | Dynamic Analysis            |
+| Phase 5  | Credential Theft Review     |
+| Phase 6  | MITRE ATT&CK Mapping        |
+| Phase 7  | IOC Development             |
+| Phase 8  | YARA Detection Development  |
+| Phase 9  | Splunk Threat Hunting       |
+| Phase 10 | Incident Documentation      |
+| Phase 11 | Final Assessment            |
 
 ### Simple Summary
 
-This timeline shows the order used to investigate the malware from initial identification through final reporting.
+This timeline shows how the malware was investigated from initial identification through reverse engineering, detection development, threat hunting, and final reporting.
 
 # Project Overview
 
 Lumma Stealer is an information-stealing malware family designed to collect sensitive data from infected systems.
 
-This project demonstrates how a Cyber Intrusion Analyst can safely investigate malware, document findings, create reusable detections, and explain technical results in a clear way.
+This project demonstrates how a Cyber Intrusion Analyst can safely investigate malware, perform reverse engineering, document findings, create reusable detections, and explain technical results in a clear way.
+
+### Simple Summary
+
+This project shows how an analyst studies malware, identifies what it is designed to steal, validates detections, and creates defensive content to help find similar threats.
 
 # Investigation Objectives
 
 * Safely analyze the malware sample in a controlled lab.
 * Identify credential theft behavior.
+* Perform reverse engineering using IDA Pro.
+* Identify malware strings, functions, and credential theft indicators.
 * Document static and dynamic analysis findings.
 * Validate Microsoft Defender detections.
 * Develop Indicators of Compromise.
@@ -98,6 +108,21 @@ This project demonstrates how a Cyber Intrusion Analyst can safely investigate m
 * Static Analysis
 * Dynamic Analysis
 * Reverse Engineering
+* Credential Theft Analysis
+
+## Reverse Engineering
+
+* IDA Pro Analysis
+* Malware String Review
+* Function Name Review
+* Credential Theft Function Identification
+* Browser Credential Collection Review
+* DPAPI-Related Function Review
+* Privilege-Related Function Review
+
+### Simple Summary
+
+Reverse engineering helped identify what the malware was designed to do by reviewing its internal strings and functions.
 
 ## Threat Hunting
 
@@ -122,7 +147,7 @@ This project demonstrates how a Cyber Intrusion Analyst can safely investigate m
 | Tool               | Purpose                                               |
 | ------------------ | ----------------------------------------------------- |
 | MalwareBazaar      | Malware intelligence and sample details               |
-| IDA Pro            | Reverse engineering and static analysis               |
+| IDA Pro            | Reverse engineering, string review, and malware function analysis |
 | Noriben            | Dynamic behavior monitoring                           |
 | Process Monitor    | Process and file activity review                      |
 | Microsoft Defender | Detection, quarantine, and removal validation         |
@@ -131,6 +156,26 @@ This project demonstrates how a Cyber Intrusion Analyst can safely investigate m
 | MITRE ATT&CK       | Mapping malware behavior to known attacker techniques |
 
 # Key Findings
+
+## Reverse Engineering Findings
+
+Evidence:
+
+* `main.getChromeLogins`
+* `main.GetChromiumMasterKeys`
+* `main.loginPBE.Decrypt`
+* `main.DPAPI`
+* `main.enablePrivilege`
+* `main.findLsassProcess`
+* `main.impersonateSystem`
+
+Simple explanation:
+
+Reverse engineering showed that the malware contained functions related to browser credential theft, password decryption, system discovery, and privilege-related activity.
+
+Non-technical explanation:
+
+This means the malware was designed to search for valuable information, especially saved browser passwords, and attempt to access protected data on the computer.
 
 ## Browser Credential Collection
 
@@ -142,7 +187,7 @@ Evidence:
 
 Simple explanation:
 
-The malware contains functions that target saved browser credentials from Chrome and Edge.
+Reverse engineering identified functions that target saved browser credentials from Chrome and Edge.
 
 ## Password Decryption
 
@@ -153,7 +198,7 @@ Evidence:
 
 Simple explanation:
 
-The malware contains functions that may help unlock protected password data stored on the computer.
+Reverse engineering identified functions that may help the malware unlock protected password data stored on the computer.
 
 ## Process and System Discovery
 
@@ -210,13 +255,13 @@ The complete indicator list is available in [`iocs/lumma-iocs.csv`](iocs/lumma-i
 
 The Lumma Stealer investigation confirmed the malware family, validated file and network indicators, documented credential theft functionality, and produced reusable detection and threat hunting content.
 
-Static analysis identified browser credential collection functions, password decryption capabilities, Chromium master key access routines, process discovery functions, and privilege-related functionality.
+Static analysis and reverse engineering identified browser credential collection functions, password decryption capabilities, Chromium master key access routines, process discovery functions, and privilege-related functionality.
 
 Dynamic analysis using Noriben, Process Monitor, and Microsoft Defender validated malware execution activity and provided evidence of detection, quarantine, blocking, and remediation actions.
 
-Threat intelligence sources including MalwareBazaar, VirusTotal, Microsoft Defender, and reverse engineering findings strengthened confidence in the final assessment. A custom YARA rule was also created for future local validation.
+Threat intelligence sources including MalwareBazaar, Microsoft Defender, and reverse engineering findings strengthened confidence in the final assessment. A custom YARA rule was also created for future local validation.
 
-This case study demonstrates practical Cyber Intrusion Analyst and Threat Hunter skills, including malware analysis, IOC enrichment, detection engineering, MITRE ATT&CK mapping, Splunk investigation workflows, and incident response documentation.
+This case study demonstrates practical Cyber Intrusion Analyst and Threat Hunter skills, including malware analysis, reverse engineering, IOC enrichment, detection engineering, MITRE ATT&CK mapping, Splunk investigation workflows, and incident response documentation.
 
 # Summary
 
@@ -225,6 +270,7 @@ This project demonstrates practical Cyber Intrusion Analyst and Threat Hunter sk
 Key competencies demonstrated include:
 
 * Malware Analysis
+* Reverse Engineering
 * Threat Hunting
 * Incident Response
 * IOC Development
@@ -236,7 +282,7 @@ Key competencies demonstrated include:
 
 ### Simple Summary
 
-This project shows the complete workflow used by security analysts to investigate malware, validate detections, document findings, and develop defensive security content.
+This project shows the complete workflow used by security analysts to investigate malware, perform reverse engineering, validate detections, document findings, and develop defensive security content.
 
 # Safety Notice
 
@@ -254,7 +300,7 @@ James Banday
 
 Threat Hunter | Cyber Intrusion Analyst | Cloud Security | Kubernetes | DevSecOps | Incident Response
 
-This case study demonstrates practical malware analysis, threat hunting, IOC enrichment, Microsoft Defender investigation, Splunk threat hunting workflows, detection engineering, MITRE ATT&CK mapping, and incident response documentation used to investigate and document Lumma Stealer credential theft activity within a controlled malware analysis lab environment.
+This case study demonstrates practical malware analysis, reverse engineering, threat hunting, IOC enrichment, Microsoft Defender investigation, Splunk threat hunting workflows, detection engineering, MITRE ATT&CK mapping, and incident response documentation used to investigate and document Lumma Stealer credential theft activity within a controlled malware analysis lab environment.
 
 ## GitHub Repository
 
