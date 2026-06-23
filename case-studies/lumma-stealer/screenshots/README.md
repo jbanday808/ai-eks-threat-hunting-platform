@@ -1,5 +1,13 @@
 # Screenshot Evidence
 
+## Supplemental Infection Chain Diagram
+
+![Lumma Stealer infection chain](LummaStealer_Infection_Chain_Diagram.png)
+
+Explanation:
+
+Shows the typical path from opening a malicious file to attempted data theft. This is an explanatory diagram, not a malware sample.
+
 ## LummaStealer_01_MalwareBazaar_Sample_Details.png
 
 ![MalwareBazaar sample details](LummaStealer_01_MalwareBazaar_Sample_Details.png)
@@ -104,10 +112,4 @@ This screenshot will show that the custom YARA rule successfully detected the Lu
 
 Status: Pending. The malware sample and YARA command-line tool are not present in this workspace, so a genuine validation screenshot could not be captured.
 
-## Supplemental Infection Chain Diagram
 
-![Lumma Stealer infection chain](LummaStealer_Infection_Chain_Diagram.png)
-
-Explanation:
-
-Shows the typical path from opening a malicious file to attempted data theft. This is an explanatory diagram, not a malware sample.
