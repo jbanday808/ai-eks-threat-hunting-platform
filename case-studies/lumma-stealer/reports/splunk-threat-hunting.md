@@ -15,7 +15,7 @@ index=* ("Trojan:Win32/SalatStealer" OR "Behavior:Win32/PFAppMultiStepRem.A")
 Search for malware filename:
 
 ```spl
-index=* "Invoice_2026.exe"
+index=* "RVAS1D3"
 ```
 
 Search for suspicious browser credential access:
