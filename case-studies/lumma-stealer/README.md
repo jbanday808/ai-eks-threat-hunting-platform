@@ -218,7 +218,7 @@ Threat intelligence sources including MalwareBazaar, VirusTotal, Microsoft Defen
 
 This case study demonstrates practical Cyber Intrusion Analyst and Threat Hunter skills, including malware analysis, IOC enrichment, detection engineering, MITRE ATT&CK mapping, Splunk investigation workflows, and incident response documentation.
 
-# Recruiter Summary
+# Summary
 
 This project demonstrates practical Cyber Intrusion Analyst and Threat Hunter skills through the investigation of a credential theft malware sample.
 
